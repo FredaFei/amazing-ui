@@ -1,17 +1,15 @@
 <template>
-  <div>
-    <h3>代码演示</h3>
-      <am-pager :current-page="currentPage" :total-page="10" :current-page.sync="currentPage"></am-pager>
+  <div class="example-box">
+    <p><strong>基础用法</strong></p>
+    <am-pager :current-page="currentPage" :total-page="10" :current-page.sync="currentPage"></am-pager>
   </div>
 </template>
 <script>
-import AmPager from '../../../src/pager/pager'
+import { AmPager } from '../../../src/index'
 
 export default {
-  components: {
-    AmPager
-  },
-   data() {
+  components: { AmPager },
+  data() {
     return {
       currentPage: 1
     }
