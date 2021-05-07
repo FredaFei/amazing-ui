@@ -5,7 +5,7 @@ chai.use(sinonChai)
 import { mount } from '@vue/test-utils'
 
 import Vue from 'vue'
-import Table from '../../src/table/table'
+import Table from '../../src/table/index'
 import TableColumn from '../../src/table/tableColumn'
 
 Vue.component('am-Table', Table)

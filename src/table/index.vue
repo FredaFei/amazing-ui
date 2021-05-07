@@ -173,12 +173,19 @@ export default {
   },
   methods: {
     createColumns() {
+      // console.log(this.$slots.default)
+      console.log(this.$slots.default);
+      if(!this.$slots.default){return}
       this.columns = this.$slots.default.map(node => {
-        console.log(node);
-        let { text, field, width } = node.componentOptions.propsData;
-        let render = node.data.scopedSlots && node.data.scopedSlots.default;
-        return { text, field, width, render };
+        // console.log(node);
+        if(node.componentOptions && node.componentOptions.propsData){
+          let { text, field, width } = node.componentOptions.propsData;
+          let render = node.data.scopedSlots && node.data.scopedSlots.default;
+          return { text, field, width, render };
+        }
       });
+
+      console.log(this.columns)
     },
     doResponseCells() {
       if (this.$scopedSlots.default) {
