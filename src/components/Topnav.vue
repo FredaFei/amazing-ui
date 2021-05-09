@@ -1,28 +1,29 @@
 <template>
   <header class="site-doc-header">
-    <div class="site-doc-menu-icon" @click="onToggleMenu">
-      <div class="menu-icon-line" @click="onToggleMenu"></div>
+    <!--mobile端-->
+    <div class="site-doc-menu-icon" @click="toggleMenu">
+      <div class="menu-icon-line" @click="toggleMenu"></div>
     </div>
     <nav class="site-doc-logo-github">
+      <!--PC端-->
       <div class="site-nav-item">
-<!--        <img :src="logo" class="logo"/>-->
+        <img src="../assets/logo.png" alt="logo" class="logo"/>
       </div>
-      <div class="site-nav-item"><a href="https://github.com/FredaFei/AUI" style="{color: '#1890ff'}">github</a>
-      </div>
+      <div class="site-nav-item"><a href="https://github.com/FredaFei/AUI" :style="{color: '#1890ff'}">github</a></div>
     </nav>
   </header>
 </template>
-<script language="ts">
+<script lang="ts">
+  import { inject, Ref } from 'vue';
+
   export default {
-    name: 'Topnav',
-    data() {
-      return {
-        logo: 'logo.png'
+    setup() {
+      const visibleMenu = inject<Ref<boolean>>('visibleMenu'); // get
+      const toggleMenu = () => {
+        visibleMenu.value = !visibleMenu.value;
       };
+      return { toggleMenu };
     },
-    methods: {
-      onToggleMenu() {}
-    }
   };
 </script>
 <style lang="scss" scoped>
@@ -35,6 +36,10 @@
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
       position: relative;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
     }
     &-logo-github {
       display: flex;
