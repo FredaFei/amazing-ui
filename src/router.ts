@@ -1,20 +1,25 @@
 import { createWebHashHistory, createRouter } from 'vue-router';
-import HelloWorld from './components/HelloWorld.vue';
-import Test from './components/Test.vue';
+import Button from './components/Button.vue';
+import Switch from './components/Switch.vue';
+import Home from './views/Home.vue';
 import Doc from './views/Doc.vue';
 
 const history = createWebHashHistory();
 export const router = createRouter({
   history,
   routes: [
-    { path: '/', component: Test },
+    { path: '/', component: Home },
     {
-      path: '/doc', component: Doc,
+      path: '/doc',
+      component: Doc,
       children: [
-        { path: '', component: Test },
-        { path: 'test', component: Test },
-        { path: 'hello', component: HelloWorld },
+        { path: '', component: Button },
+        { path: 'button', component: Button },
+        { path: 'switch', component: Switch },
       ]
     },
   ]
+});
+router.afterEach(() => {
+  console.log('change router');
 });
