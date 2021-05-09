@@ -8,11 +8,18 @@
           <h2>入门</h2>
           <ol>
             <li>
-              <NavLink to="/guide">快速上手</NavLink>
+              <router-link to="/doc">快速上手</router-link>
             </li>
           </ol>
           <h2>组件</h2>
-          <ol>{renderLink(linkMap)}</ol>
+          <ol>
+            <li>
+              <router-link to="/doc/button">Button 组件</router-link>
+            </li>
+            <li>
+              <router-link to="/doc/switch">Switch 组件</router-link>
+            </li>
+          </ol>
         </aside>
       </div>
       <main class="site-doc-main">
@@ -25,60 +32,29 @@
   </div>
 </template>
 
-<script language="ts">
+<script lang="ts">
   import Topnav from '../components/Topnav.vue';
   import { inject, Ref } from 'vue';
 
   export default {
-    name: 'Doc',
     components: { Topnav },
     setup() {
-      const visibleMenu = inject<Ref<boolean>>('menuVisible'); // get
+      const visibleMenu = inject<Ref<boolean>>('visibleMenu'); // get
       return { visibleMenu };
     },
   };
 </script>
 <style lang="scss" scoped>
-  $site-color: #314659;
-  $focus-color: #1890ff;
-  $site-border-color: #e8e8e8;
-  body {
-    overflow-x: hidden;
-    color: $site-color;
-    font-size: 16px;
-    font-family: 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.5;
-    background: #fff;
-    transition: background 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-  }
   .site-doc {
     &-wrapper {
       min-height: 100vh;
     }
-    &-header {
-      display: flex;
-      padding: 4px 48px;
-      align-items: center;
-      background: #fdf9f3;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
-      position: relative;
-    }
-    &-logo-github {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      color: #333;
-      .logo {
-        height: 75px;
-      }
-    }
     &-body {
       //https://css-tricks.com/couple-takes-sticky-footer/
-      margin: 24px auto;
+      padding-top: 100px;
+      margin: auto;
       max-width: 1280px;
-      min-height: calc(100vh - 184px);
+      min-height: calc(100vh - 154px);
       display: flex;
     }
     &-aside {
@@ -97,16 +73,16 @@
         li {
           line-height: 40px;
           font-size: 14px;
-          color: $site-color;
+          color: #314659;
           a {
             display: block;
             padding-left: 1.5em;
-            color: $site-color;
+            color: #314659;
             &.active {
               background: #cfd7ff;
             }
             &:hover {
-              color: $focus-color;
+              color: #1890ff;
             }
           }
         }
@@ -136,13 +112,13 @@
   @media (max-width: 750px) {
     .site-doc {
       &-body {
-        margin: 24px 8px;
+        padding-top: 60px;
         flex-direction: column;
-        min-height: calc(100vh - 145px);
+        min-height: calc(100vh - 110px);
       }
       &-aside-wrapper {
         position: fixed;
-        top: 0;
+        top: 44px;
         left: 0;
         right: 0;
         bottom: 0;
