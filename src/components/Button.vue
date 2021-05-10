@@ -1,7 +1,11 @@
 <template>
-  <h1>button</h1>
+  <h1>this is a {{name}}</h1>
 </template>
 
 <script lang="ts">
-  export default {};
+  export default {
+    props: {
+      name: String
+    }
+  };
 </script>
