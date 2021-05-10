@@ -8,7 +8,10 @@
           <h2>入门</h2>
           <ol>
             <li>
-              <router-link to="/doc">快速上手</router-link>
+              <router-link to="/doc/get-started">快速上手</router-link>
+            </li>
+            <li>
+              <router-link to="/doc/install">安装</router-link>
             </li>
           </ol>
           <h2>组件</h2>
@@ -39,7 +42,7 @@
   export default {
     components: { Topnav },
     setup() {
-      const visibleMenu = inject<Ref<boolean>>('visibleMenu'); // get
+      const visibleMenu = inject<Ref<boolean>>('visibleMenu');
       return { visibleMenu };
     },
   };
@@ -78,7 +81,7 @@
             display: block;
             padding-left: 1.5em;
             color: #314659;
-            &.active {
+            &.router-link-active {
               background: #cfd7ff;
             }
             &:hover {
