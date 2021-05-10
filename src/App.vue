@@ -11,7 +11,7 @@
     setup() {
       const width = document.documentElement.clientWidth;
       const visibleMenu = ref(false);
-      provide('visibleMenu', visibleMenu); // set
+      provide('visibleMenu', visibleMenu);
       router.afterEach(() => {
         if (width <= 500) {
           visibleMenu.value = false;
