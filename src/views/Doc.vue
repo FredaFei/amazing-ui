@@ -48,6 +48,9 @@
   };
 </script>
 <style lang="scss" scoped>
+  $site-color: #314659;
+  $focus-color: #1890ff;
+  $site-border-color: #e8e8e8;
   .site-doc {
     &-wrapper {
       min-height: 100vh;
