@@ -1,5 +1,5 @@
 import { createWebHashHistory, createRouter } from 'vue-router';
-import Button from './components/Button.vue';
+import ButtonDemo from './components/ButtonDemo.vue';
 import Switch from './components/Switch.vue';
 import Home from './views/Home.vue';
 import Doc from './views/Doc.vue';
@@ -20,7 +20,7 @@ export const router = createRouter({
         { path: '', redirect: '/doc/get-started' },
         { path: 'get-started', component: md('getStarted') },
         { path: 'install', component: md('install') },
-        { path: 'button', component: Button },
+        { path: 'button', component: ButtonDemo },
         { path: 'switch', component: Switch },
       ]
     },
