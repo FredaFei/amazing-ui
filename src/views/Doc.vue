@@ -119,6 +119,8 @@
     .site-doc {
       &-body {
         padding-top: 60px;
+        margin-left: 8px;
+        margin-right: 8px;
         flex-direction: column;
         min-height: calc(100vh - 110px);
       }
