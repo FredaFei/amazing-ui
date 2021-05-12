@@ -8,7 +8,7 @@
 <script lang="ts">
   import Button1Demo from './Button1.demo.vue';
   import Button2Demo from './Button2.demo.vue';
-  import Demo from './Demo.vue';
+  import Demo from '../Demo.vue';
 
   export default {
     components: { Demo },

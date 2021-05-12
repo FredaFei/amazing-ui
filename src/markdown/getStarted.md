@@ -4,7 +4,7 @@
 
 一套轻量的web component，基于typeScript、Vue3.0 开发。
 
-```js
+```
 import {Button} from 'amazing-ui';
 ```
 
