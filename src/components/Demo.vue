@@ -17,7 +17,7 @@
 <script lang="ts">
   import { ref, computed } from 'vue';
   import 'prismjs';
-  import 'prismjs/themes/prism.css';
+  import 'prismjs/themes/prism-okaidia.css';
 
   const Prism = (window as any).Prism;
 
