@@ -8,14 +8,14 @@
           <!--        <Icon name={visible ? 'code-open' : 'code-close'}/>-->
           <span>查看代码</span>
         </div>
-        <pre v-if="visibleCode" class="language-html" v-html="Prism.highlight(component.__sourceCode, Prism.languages.html, 'html')"></pre>
+        <pre v-if="visibleCode" class="language-html" v-html="html"></pre>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
   import 'prismjs';
   import 'prismjs/themes/prism.css';
 
@@ -23,11 +23,14 @@
 
   export default {
     props: { component: Object },
-    setup() {
+    setup(props) {
       const visibleCode = ref(false);
       const toggleCode = () => visibleCode.value = !visibleCode.value;
+      const html = computed(() => {
+        return Prism.highlight(props.component.__sourceCode, Prism.languages.html, 'html');
+      });
       return {
-        Prism, toggleCode, visibleCode
+        Prism, toggleCode, visibleCode, html
       };
     }
   };
