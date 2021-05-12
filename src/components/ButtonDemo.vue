@@ -1,47 +1,18 @@
 <template>
   <div class="exp-box">
-    <h3>基础应用</h3>
-    <div class="exp-section">
-      <component :is="Button1Demo"/>
-      <div class="code-box">
-        <div class="code-title" @click="toggleCode">
-          <!--        <Icon name={visible ? 'code-open' : 'code-close'}/>-->
-          <span>查看代码</span>
-        </div>
-        <pre v-if="visibleCode" class="language-html" v-html="Prism.highlight(Button1Demo.__sourceCode,Prism.languages.html,'html')"></pre>
-      </div>
-    </div>
-    <h3>disable</h3>
-    <div class="exp-section">
-      <component :is="Button2Demo"/>
-      <div class="code-box">
-        <div class="code-title" @click="toggleCode">
-          <!--        <Icon name={visible ? 'code-open' : 'code-close'}/>-->
-          <span>查看代码</span>
-        </div>
-        <pre v-if="visibleCode" class="language-html" v-html="Prism.highlight(Button2Demo.__sourceCode,Prism.languages.html,'html')"></pre>
-      </div>
-    </div>
+    <Demo :component="Button1Demo"/>
+    <Demo :component="Button2Demo"/>
   </div>
 </template>
 
 <script lang="ts">
   import Button1Demo from './Button1.demo.vue';
   import Button2Demo from './Button2.demo.vue';
-  import { ref } from 'vue';
-  import 'prismjs';
-  import 'prismjs/themes/prism.css';
-
-  const Prism = (window as any).Prism;
+  import Demo from './Demo.vue';
 
   export default {
-    setup() {
-      const visibleCode = ref(false);
-      const toggleCode = () => visibleCode.value = !visibleCode.value;
-      return {
-        Button1Demo, Button2Demo, toggleCode, visibleCode, Prism
-      };
-    }
+    components: { Demo },
+    setup() {return { Button1Demo, Button2Demo };}
   };
 </script>
 <style lang="scss" scoped>
