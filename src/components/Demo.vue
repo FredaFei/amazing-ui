@@ -1,6 +1,6 @@
 <template>
   <div class="exp-box">
-    <h3>disable</h3>
+    <h3>{{component.__sourceCodeTitle}}</h3>
     <div class="exp-section">
       <component :is="component"/>
       <div class="code-box">
@@ -41,6 +41,10 @@
   $site-border-color: #e8e8e8;
   $light-color: #666;
   .exp-box {
+    h3 {
+      font-size: 18px;
+      padding: 10px 0;
+    }
     &.custom-icon {
       .am-icon {font-size: 28px;}
     }
