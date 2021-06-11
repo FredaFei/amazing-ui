@@ -16,17 +16,7 @@
   };
 </script>
 <style lang="scss" scoped>
-  @keyframes ripple {
-    to {
-      transform: scale(1);
-      opacity: 0;
-    }
-  }
-  @mixin ripple {
-    animation: ripple 0.65s ease-out;
-  }
-  $blue: #40a9ff;
-  $color: #333;
+  @import "../../style/_var.scss";
   .switch-wrap {
     display: inline-flex;
     vertical-align: middle;
