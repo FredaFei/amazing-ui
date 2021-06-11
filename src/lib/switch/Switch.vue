@@ -1,15 +1,19 @@
 <template>
-  <label class="switch-wrap active" @click={onClick}>
-    <span class="core active">
-      <span class="ripple active"></span>
+  <span class="switch-wrap" :class="[value ? 'active' : '', disabled ? 'disabled' : '']" @click={onClick}>
+    <span class="core" :class="{active: value}">
+      <span class="ripple" :class="{active: value}"></span>
     </span>
-  </label>
+  </span>
 </template>
 <script lang="ts">
   export default {
-    props: {},
-    setup() {
+    props: {
+      value: Boolean,
+      disabled: Boolean
+    },
+    setup(props, context) {
       const onClick = () => {
+        context.emit('update:value', !props.value);
       };
       return { onClick };
     },
