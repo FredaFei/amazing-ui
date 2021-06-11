@@ -1,7 +1,5 @@
-// @ts-ignore
-import path from 'path';
-// @ts-ignore
-import fs from 'fs';
+import * as path from 'path';
+import * as fs from 'fs';
 import marked from 'marked';
 
 const mdToJs = str => {
