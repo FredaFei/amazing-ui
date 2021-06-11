@@ -1,6 +1,5 @@
 import { md } from './plugins/md';
-// @ts-ignore
-import fs from 'fs';
+import * as fs from 'fs';
 import { baseParse } from '@vue/compiler-core';
 
 module.exports = {
@@ -9,8 +8,8 @@ module.exports = {
     demo: (options) => {
       const { path } = options;
       const file = fs.readFileSync(path).toString();
-      const parsed = baseParse(file).children.find(n => n.tag === 'demo');
-      const title = parsed.children[0].content;
+      const parsed = baseParse(file).children.find(n => n['tag'] === 'demo');
+      const title = parsed['children'][0].content;
       const main = file.split(parsed.loc.source).join('').trim();
       return `export default function (Component) {
         Component.__sourceCode = ${JSON.stringify(main)}
