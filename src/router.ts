@@ -1,6 +1,6 @@
 import { createWebHashHistory, createRouter } from 'vue-router';
 import ButtonDemo from './components/button-demo/ButtonDemo.vue';
-import Switch from './lib/switch/Switch.vue';
+import SwitchDemo from './components/switch-demo/SwitchDemo.vue';
 import Home from './views/Home.vue';
 import Doc from './views/Doc.vue';
 import Markdown from './components/Markdown.vue';
@@ -21,7 +21,7 @@ export const router = createRouter({
         { path: 'get-started', component: md('getStarted') },
         { path: 'install', component: md('install') },
         { path: 'button', component: ButtonDemo },
-        { path: 'switch', component: Switch },
+        { path: 'switch', component: SwitchDemo },
       ]
     },
   ]
