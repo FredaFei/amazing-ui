@@ -83,7 +83,6 @@
 </script>
 <style lang="scss">
   @import '../../style/_var.scss';
-
   #{component(tabs)} {
     &-wrapper {
       position: relative;
@@ -167,8 +166,10 @@
         color: #ccc;
       }
     }
+    &-pane-body {
+      padding: 8px;
+    }
   }
-
   #{component(tabPane)} {
     &-pane-item {
       padding: 8px;
