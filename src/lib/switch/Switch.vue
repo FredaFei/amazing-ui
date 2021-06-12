@@ -1,9 +1,9 @@
 <template>
-  <span class="switch-wrap" :class="[value && 'active',  disabled ? 'disabled':'']" @click="onToggle">
+  <label class="switch-wrap" :class="[value && 'active',  disabled ? 'disabled':'']" @click="onToggle">
     <span class="core" :class="{active: value}" ref="rippleParentRef">
       <span class="ripple" :class="{active: value}" ref="rippleRef" :style="position"></span>
     </span>
-  </span>
+  </label>
 </template>
 <script lang="ts">
   import { ref } from 'vue';
