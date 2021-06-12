@@ -41,7 +41,6 @@
 
       const calculateLineStyle = () => {
         selectedItem.value = navsItem.value.filter((el, index) => {
-          console.log('index', index);
           return el.classList.contains('am-tabs-active');
         })[0];
         let { left: left1, top: top1 } = container.value.getBoundingClientRect();
