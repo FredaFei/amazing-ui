@@ -10,7 +10,7 @@
           <slot name="title"></slot>
         </div>
         <div class="am-dialog-body">
-          <slot name="body"/>
+          <slot name="content"/>
         </div>
         <template v-if="visibleFooter">
           <div class="am-dialog-footer">
