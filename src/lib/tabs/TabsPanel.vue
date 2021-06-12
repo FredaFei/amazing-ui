@@ -1,5 +1,5 @@
 <template>
-  <div>tabs panel</div>
+  <div><slot/></div>
 </template>
 <script lang="ts">
   export default {}
