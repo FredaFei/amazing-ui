@@ -3,7 +3,7 @@
     <div class="tabs-nav-wrapper">
       <div class="tabs-nav" ref="container">
         <div class="tabs-nav-item" v-for="(t,index) in titles" :key="t.name" :class="{'tabs-active':t.name===selected}"
-             :ref="el => { if (t.name===selected) selectedItem = el }"
+             :ref="el => { if (el) navsItem[index] = el }"
              @click="onToggle(t.name)">{{t.title}}
         </div>
         <div class="line" ref="indicator"/>
@@ -16,7 +16,7 @@
 </template>
 <script lang="ts">
   import TabsPanel from './TabsPanel.vue';
-  import { ref, computed, onMounted, watchEffect } from 'vue';
+  import { ref, computed, onMounted, onUpdated, watchEffect } from 'vue';
 
   export default {
     props: {
@@ -31,20 +31,40 @@
           return ['horizontal', 'vertical'].indexOf(val) > -1;
         }
       },
+      lineWidthOrHeight: Number
     },
     setup(props, context) {
       const selectedItem = ref<HTMLDivElement>(null);
+      const navsItem = ref<HTMLDivElement[]>([]);
       const indicator = ref<HTMLDivElement>(null);
       const container = ref<HTMLDivElement>(null);
-      const x = () => {
-        const { width, left: left1 } = selectedItem.value.getBoundingClientRect();
-        indicator.value.style.width = width + 'px';
-        const { left: left2 } = container.value.getBoundingClientRect();
-        indicator.value.style.left = left1 - left2 + 'px';
 
+      const calculateLineStyle = () => {
+        selectedItem.value = navsItem.value.filter((el, index) => {
+          console.log('index', index);
+          return el.classList.contains('tabs-active');
+        })[0];
+        let { left: left1, top: top1 } = container.value.getBoundingClientRect();
+        let { width, left: left2, height, top: top2 } = selectedItem.value.getBoundingClientRect();
+        const lineWidth = props.lineWidthOrHeight || width;
+        const lineHeight = props.lineWidthOrHeight || height;
+        if (props.direction === 'horizontal') {
+          indicator.value.style.width = width + 'px';
+          const x = left2 - left1 + (width - lineWidth) / 2;
+          indicator.value.style.transform = `translate3d(${x}px, 0, 0)`;
+        } else {
+          indicator.value.style.height = height + 'px';
+          const y = top2 - top1 + (height - lineHeight) / 2;
+          indicator.value.style.transform = `translate3d(${y}px, 0, 0)`;
+        }
       };
       onMounted(() => {
-        watchEffect(x);
+        console.log('mount');
+        calculateLineStyle();
+      });
+      onUpdated(() => {
+        console.log('update');
+        calculateLineStyle();
       });
       const defaults = context.slots.default();
       console.log(...defaults);
@@ -63,7 +83,7 @@
       const onToggle = (value) => {
         context.emit('update:selected', value);
       };
-      return { titles, defaults, onToggle, current, indicator, tabsClass, container, selectedItem };
+      return { titles, defaults, onToggle, current, indicator, tabsClass, container, selectedItem, navsItem };
     }
   };
 </script>
@@ -85,11 +105,11 @@
       justify-content: flex-start;
       flex-shrink: 0;
       border-bottom: 1px solid #ddd;
-      transition: transform 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
       .line {
         position: absolute;
         box-sizing: border-box;
-        transition: left 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+        transition: transform 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
       }
     }
     &-horizontal {
