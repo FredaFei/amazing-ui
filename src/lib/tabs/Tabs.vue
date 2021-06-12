@@ -2,7 +2,7 @@
   <div class="tabs-wrapper">
     <div class="tabs-nav-wrapper">
       <div class="tabs-nav">
-        <div class="tabs-nav-item" v-for="t in titles" :key="t">{{t}}</div>
+        <div class="tabs-nav-item" v-for="t in titles" :key="t.name" :class="{'tabs-active':t.name===currentName}">{{t.title}}</div>
         <div class="line"/>
       </div>
     </div>
@@ -13,18 +13,24 @@
 </template>
 <script lang="ts">
   import TabsPanel from './TabsPanel.vue';
+  import { ref } from 'vue';
 
   export default {
+    props: {
+      name: String,
+      currentName: String
+    },
     setup(props, context) {
       const defaults = context.slots.default();
       console.log(...defaults);
+
       defaults.forEach(tag => {
         if (tag.type !== TabsPanel) {
           throw new Error('tabs 子节点必须为 TabsPanel');
         }
         return tag;
       });
-      const titles = defaults.map(tag => tag.props.title);
+      const titles = defaults.map(tag => ({ title: tag.props.title, name: tag.props.name }));
       return { titles, defaults };
     }
   };
