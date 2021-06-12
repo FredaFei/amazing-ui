@@ -1,9 +1,9 @@
 <demo>
-  基础应用
+  垂直布局
 </demo>
 <template>
   <div>
-    <Tabs v-model:selected="current">
+    <Tabs v-model:selected="current" direction="vertical">
       <TabsPanel title="tabs 1" name="1">panel 1</TabsPanel>
       <TabsPanel title="tabs 1000" name="2">panel 2</TabsPanel>
     </Tabs>
