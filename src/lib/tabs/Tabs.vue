@@ -9,7 +9,7 @@
         <div class="am-tabs-nav-line" ref="indicator"/>
       </div>
     </div>
-    <ul class="tabs-pane-body">
+    <ul class="am-tabs-pane-body">
       <component :is="current" :key="current.props.name"/>
     </ul>
   </div>
