@@ -55,22 +55,14 @@
         } else {
           indicator.value.style.height = height + 'px';
           const y = top2 - top1 + (height - lineHeight) / 2;
-          indicator.value.style.transform = `translate3d(${y}px, 0, 0)`;
+          indicator.value.style.transform = `translate3d(0, ${y}px, 0)`;
         }
       };
-      onMounted(() => {
-        console.log('mount');
-        calculateLineStyle();
-      });
-      onUpdated(() => {
-        console.log('update');
-        calculateLineStyle();
-      });
+      onMounted(calculateLineStyle);
+      onUpdated(calculateLineStyle);
       const defaults = context.slots.default();
-      console.log(...defaults);
 
       defaults.forEach(tag => {
-        console.log('tag', tag);
         if (tag.type !== TabsPanel) {
           throw new Error('tabs 子节点必须为 TabsPanel');
         }
@@ -79,11 +71,15 @@
       const titles = defaults.map(tag => ({ title: tag.props.title, name: tag.props.name }));
       const current = computed(() => defaults.filter(tag => tag.props.name === props.selected)[0]);
       const tabsClass = computed(() => ([`tabs-${props.direction}`]));
+      const navsClass = computed(() => ([`tabs-${props.direction}`]));
 
       const onToggle = (value) => {
         context.emit('update:selected', value);
       };
-      return { titles, defaults, onToggle, current, indicator, tabsClass, container, selectedItem, navsItem };
+      return {
+        titles, defaults, onToggle, current, indicator, tabsClass,
+        container, selectedItem, navsItem, navsClass
+      };
     }
   };
 </script>
@@ -127,7 +123,7 @@
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
-      &-nav {
+      .tabs-nav {
         border-bottom: none;
         flex-direction: column;
         border-right: 1px solid #ddd;
@@ -135,8 +131,8 @@
           height: 100%;
           flex-direction: column;
         }
+        .tabs-nav-item {text-align: right;}
       }
-      &-nav-item {text-align: right;}
       .line {
         top: 0;
         right: -1px;
@@ -167,6 +163,9 @@
       &:hover {
         color: #ccc;
       }
+    }
+    &-pane-body {
+      padding: 8px;
     }
   }
 </style>
