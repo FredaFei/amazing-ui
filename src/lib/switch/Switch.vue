@@ -1,7 +1,7 @@
 <template>
-  <label class="switch-wrap" :class="[value && 'active',  disabled ? 'disabled':'']" @click="onToggle">
-    <span class="core" :class="{active: value}" ref="rippleParentRef">
-      <span class="ripple" :class="{active: value}" ref="rippleRef" :style="position"></span>
+  <label class="am-switch" :class="[value && 'am-switch-active',  disabled ? 'am-switch-disabled':'']" @click="onToggle">
+    <span class="am-switch-core" :class="{active: value}" ref="rippleParentRef">
+      <span class="am-switch-ripple" :class="{active: value}" ref="rippleRef" :style="position"></span>
     </span>
   </label>
 </template>
@@ -39,9 +39,10 @@
     },
   };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
   @import "../../style/_var.scss";
-  .switch-wrap {
+
+  #{component(switch)} {
     display: inline-flex;
     vertical-align: middle;
     width: 40px;
@@ -51,13 +52,13 @@
     cursor: pointer;
     position: relative;
     transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    &.active {
+    &-active {
       background: rgba(#2196f3, 0.6);
     }
-    &.disabled {
+    &-disabled {
       opacity: 0.45;
     }
-    .core {
+    &-core {
       position: absolute;
       top: 50%;
       margin-top: -10px;
@@ -73,7 +74,7 @@
         background: $blue;
         transform: translateX(100%);
       }
-      .ripple {
+      .am-switch-ripple {
         position: absolute;
         border-radius: 50%;
         left: 50%;
