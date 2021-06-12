@@ -9,7 +9,7 @@
       <template v-slot:title>
         <span>温馨提示</span>
       </template>
-      <template v-slot:body>
+      <template v-slot:content>
         <div>打雷啦...</div>
         <div>下雨啦...</div>
         <div>收衣服啦...</div>
@@ -21,7 +21,7 @@
       <template v-slot:title>
         <span>温馨提示</span>
       </template>
-      <template v-slot:body>
+      <template v-slot:content>
         <div>打雷啦...</div>
         <div>下雨啦...</div>
         <div>收衣服啦...</div>
