@@ -1,6 +1,7 @@
 <template>
   <div>
     tabs
+    <div v-for="t in titles" :key="t">{{t}}</div>
     <component v-for="c in defaults" :is="c" :key="c"/>
   </div>
 </template>
@@ -12,12 +13,13 @@
       const defaults = context.slots.default();
       console.log(...defaults);
       defaults.forEach(tag => {
-        if(tag.type !== TabsPanel){
-          throw new Error('tabs 子节点必须为 TabsPanel')
+        if (tag.type !== TabsPanel) {
+          throw new Error('tabs 子节点必须为 TabsPanel');
         }
-        return tag
+        return tag;
       });
-      return { defaults };
+      const titles = defaults.forEach(tag => tag.props.title);
+      return { titles, defaults };
     }
   };
 </script>
