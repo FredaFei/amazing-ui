@@ -3,9 +3,9 @@
 </demo>
 <template>
   <div>
-    <Tabs>
-      <TabsPanel title="tabs 1">panel 1</TabsPanel>
-      <TabsPanel title="tabs 2">panel 2</TabsPanel>
+    <Tabs :current-name="current">
+      <TabsPanel title="tabs 1" name="1">panel 1</TabsPanel>
+      <TabsPanel title="tabs 2" name="2">panel 2</TabsPanel>
     </Tabs>
   </div>
 </template>
@@ -20,6 +20,8 @@
       Tabs, TabsPanel
     },
     setup() {
+      const current = ref('1');
+      return { current };
     },
   };
 </script>
