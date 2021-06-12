@@ -1,28 +1,30 @@
 <template>
   <template v-if="visible">
-    <div v-if="mask" class="am-dialog-mask" @click={onClickMask}></div>
-    <div class="am-dialog">
-      <div class="am-dialog-close" @click="onClose">
-        <Icon name="close"/>
-      </div>
-      <div class="am-dialog-header">
-        <slot name="title"></slot>
-      </div>
-      <div class="am-dialog-body">
-        <slot name="body"/>
-      </div>
-      <template v-if="visibleFooter">
-        <div class="am-dialog-footer">
-          <template v-if="cancelButtonText && !customFooter">
-            <Button @click="onCancel">{{ cancelButtonText }}</Button>
-          </template>
-          <template v-if="confirmButtonText && !customFooter">
-            <Button @click="onConfirm" theme="primary">{{ confirmButtonText }}</Button>
-          </template>
-          <slot name="footer"></slot>
+    <Teleport to="body">
+      <div v-if="mask" class="am-dialog-mask" @click={onClickMask}></div>
+      <div class="am-dialog">
+        <div class="am-dialog-close" @click="onClose">
+          <Icon name="close"/>
         </div>
-      </template>
-    </div>
+        <div class="am-dialog-header">
+          <slot name="title"></slot>
+        </div>
+        <div class="am-dialog-body">
+          <slot name="body"/>
+        </div>
+        <template v-if="visibleFooter">
+          <div class="am-dialog-footer">
+            <template v-if="cancelButtonText && !customFooter">
+              <Button @click="onCancel">{{ cancelButtonText }}</Button>
+            </template>
+            <template v-if="confirmButtonText && !customFooter">
+              <Button @click="onConfirm" theme="primary">{{ confirmButtonText }}</Button>
+            </template>
+            <slot name="footer"></slot>
+          </div>
+        </template>
+      </div>
+    </Teleport>
   </template>
 </template>
 <script lang="ts">
