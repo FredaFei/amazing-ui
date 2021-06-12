@@ -1,5 +1,5 @@
 <template>
-  <span class="switch-wrap" :class="[value ? 'active' : '', disabled ? 'disabled' : '']" @click={onClick}>
+  <span class="switch-wrap" :class="[value ? 'active' : '', disabled ? 'disabled' : '']" @click="onToggle">
     <span class="core" :class="{active: value}">
       <span class="ripple" :class="{active: value}"></span>
     </span>
@@ -12,10 +12,10 @@
       disabled: Boolean
     },
     setup(props, context) {
-      const onClick = () => {
+      const onToggle = () => {
         context.emit('update:value', !props.value);
       };
-      return { onClick };
+      return { onToggle };
     },
   };
 </script>
