@@ -4,7 +4,7 @@
       <div class="tabs-nav" ref="container">
         <div class="tabs-nav-item" v-for="(t,index) in titles" :key="t.name" :class="{'tabs-active':t.name===selected}"
              :ref="el => { if (t.name===selected) selectedItem = el }"
-             @click="()=>onToggle(t.name)">{{t.title}}
+             @click="onToggle(t.name)">{{t.title}}
         </div>
         <div class="line" ref="indicator"/>
       </div>
