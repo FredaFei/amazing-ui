@@ -1,22 +1,41 @@
 <template>
   <span class="switch-wrap" :class="[value && 'active',  disabled ? 'disabled':'']" @click="onToggle">
-    <span class="core" :class="{active: value}">
-      <span class="ripple" :class="{active: value}"></span>
+    <span class="core" :class="{active: value}" ref="rippleParentRef">
+      <span class="ripple" :class="{active: value}" ref="rippleRef" :style="position"></span>
     </span>
   </span>
 </template>
 <script lang="ts">
+  import { ref } from 'vue';
+
   export default {
     props: {
       value: Boolean,
       disabled: Boolean
     },
     setup(props, context) {
+      const position = ref(null);
+      const rippleParentRef = ref(null);
+      const rippleRef = ref(null);
       const onToggle = () => {
         if (props.disabled) {return; }
+        onRippleEffect();
         context.emit('update:value', !props.value);
       };
-      return { onToggle };
+      const onRippleEffect = (): any => {
+        const targetEl = rippleParentRef.value;
+        const rippleEl = rippleRef.value;
+        rippleEl!.classList.remove('active');
+        const { width } = targetEl!.getBoundingClientRect();
+        position.value = {
+          width: `${width * 2}px`,
+          height: `${width * 2}px`,
+          marginLeft: `-${width}px`,
+          marginTop: `-${width}px`
+        };
+        rippleEl!.classList.add('active');
+      };
+      return { onToggle, position,rippleParentRef, rippleRef};
     },
   };
 </script>
