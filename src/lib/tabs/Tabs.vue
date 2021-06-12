@@ -1,12 +1,12 @@
 <template>
-  <div class="tabs-wrapper" :class="tabsClass">
-    <div class="tabs-nav-wrapper">
-      <div class="tabs-nav" ref="container">
-        <div class="tabs-nav-item" v-for="(t,index) in titles" :key="t.name" :class="{'tabs-active':t.name===selected}"
+  <div class="am-tabs-wrapper" :class="tabsClass">
+    <div class="am-tabs-nav-wrapper">
+      <div class="am-tabs-nav" ref="container">
+        <div class="am-tabs-nav-item" v-for="(t,index) in titles" :key="t.name" :class="{'am-tabs-active':t.name===selected}"
              :ref="el => { if (el) navsItem[index] = el }"
              @click="onToggle(t.name)">{{t.title}}
         </div>
-        <div class="line" ref="indicator"/>
+        <div class="am-tabs-nav-line" ref="indicator"/>
       </div>
     </div>
     <ul class="tabs-pane-body">
@@ -42,7 +42,7 @@
       const calculateLineStyle = () => {
         selectedItem.value = navsItem.value.filter((el, index) => {
           console.log('index', index);
-          return el.classList.contains('tabs-active');
+          return el.classList.contains('am-tabs-active');
         })[0];
         let { left: left1, top: top1 } = container.value.getBoundingClientRect();
         let { width, left: left2, height, top: top2 } = selectedItem.value.getBoundingClientRect();
@@ -70,22 +70,22 @@
 
       const titles = defaults.map(tag => ({ title: tag.props.title, name: tag.props.name }));
       const current = computed(() => defaults.filter(tag => tag.props.name === props.selected)[0]);
-      const tabsClass = computed(() => ([`tabs-${props.direction}`]));
-      const navsClass = computed(() => ([`tabs-${props.direction}`]));
+      const tabsClass = computed(() => ([`am-tabs-${props.direction}`]));
 
       const onToggle = (value) => {
         context.emit('update:selected', value);
       };
       return {
         titles, defaults, onToggle, current, indicator, tabsClass,
-        container, selectedItem, navsItem, navsClass
+        container, selectedItem, navsItem,
       };
     }
   };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
   @import '../../style/_var.scss';
-  .tabs {
+
+  #{component(tabs)} {
     &-wrapper {
       position: relative;
     }
@@ -101,43 +101,47 @@
       justify-content: flex-start;
       flex-shrink: 0;
       border-bottom: 1px solid #ddd;
-      transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-      .line {
+      transition: transform 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+      &-line {
         position: absolute;
         box-sizing: border-box;
         transition: transform 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
       }
     }
     &-horizontal {
-      &-nav-wrapper {
-        width: 100%;
-      }
-      .line {
-        left: 0;
-        bottom: -1px;
-        border-right: none;
-        border-bottom: 2px solid #1890ff;
+      #{component(tabs)} {
+        &-nav-wrapper {
+          width: 100%;
+        }
+        &-nav-line {
+          left: 0;
+          bottom: -1px;
+          border-right: none;
+          border-bottom: 2px solid #1890ff;
+        }
       }
     }
     &-vertical {
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
-      .tabs-nav {
-        border-bottom: none;
-        flex-direction: column;
-        border-right: 1px solid #ddd;
-        &-wrapper {
-          height: 100%;
+      #{component(tabs)} {
+        &-nav {
+          border-bottom: none;
           flex-direction: column;
+          border-right: 1px solid #ddd;
+          &-wrapper {
+            height: 100%;
+            flex-direction: column;
+          }
         }
-        .tabs-nav-item {text-align: right;}
-      }
-      .line {
-        top: 0;
-        right: -1px;
-        border-bottom: none;
-        border-right: 2px solid #1890ff;
+        &-nav-item {text-align: right;}
+        &-nav-line {
+          top: 0;
+          right: -1px;
+          border-bottom: none;
+          border-right: 2px solid #1890ff;
+        }
       }
     }
     &-nav-item {
@@ -150,7 +154,7 @@
       &:hover {
         color: $blue;
       }
-      & + .tabs-nav-item {
+      & + .am-tabs-item {
         margin-left: 10px;
       }
     }
@@ -164,8 +168,15 @@
         color: #ccc;
       }
     }
-    &-pane-body {
+  }
+
+  #{component(tabPane)} {
+    &-pane-item {
       padding: 8px;
+      display: none;
+    }
+    &-active {
+      display: block;
     }
   }
 </style>
