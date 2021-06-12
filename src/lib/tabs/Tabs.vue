@@ -20,10 +20,6 @@
 
   export default {
     props: {
-      name: {
-        type: String,
-        required: true
-      },
       selected: {
         type: String,
         required: true
