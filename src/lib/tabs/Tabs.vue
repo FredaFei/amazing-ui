@@ -7,13 +7,13 @@
       </div>
     </div>
     <ul class="tabs-pane-body">
-      <component v-for="c in defaults" :is="c" :key="c"/>
+      <component :is="current" :key="current.props.name"/>
     </ul>
   </div>
 </template>
 <script lang="ts">
   import TabsPanel from './TabsPanel.vue';
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
 
   export default {
     props: {
@@ -28,13 +28,15 @@
         if (tag.type !== TabsPanel) {
           throw new Error('tabs 子节点必须为 TabsPanel');
         }
-        return tag;
       });
+
       const titles = defaults.map(tag => ({ title: tag.props.title, name: tag.props.name }));
+      const current = computed(() => defaults.filter(tag => tag.props.name === props.selected)[0]);
+
       const onToggle = (value) => {
         context.emit('update:selected', value);
       };
-      return { titles, defaults, onToggle };
+      return { titles, defaults, onToggle, current };
     }
   };
 </script>
