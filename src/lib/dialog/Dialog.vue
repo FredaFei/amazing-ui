@@ -11,17 +11,27 @@
       <div class="am-dialog-body">
         <slot name="body"/>
       </div>
-      <div class="am-dialog-footer">
-        <slot name="footer"></slot>
-      </div>
+      <template v-if="visibleFooter">
+        <div class="am-dialog-footer">
+          <template v-if="cancelButtonText && !customFooter">
+            <Button @click="onCancel">{{ cancelButtonText }}</Button>
+          </template>
+          <template v-if="confirmButtonText && !customFooter">
+            <Button @click="onConfirm" theme="primary">{{ confirmButtonText }}</Button>
+          </template>
+          <slot name="footer"></slot>
+        </div>
+      </template>
     </div>
   </template>
 </template>
 <script lang="ts">
   import Icon from '../icon/Icon.vue';
+  import Button from '../button/Button.vue';
+  import { computed } from 'vue';
 
   export default {
-    components: { Icon },
+    components: { Icon, Button },
     props: {
       visible: {
         type: Boolean,
@@ -33,17 +43,45 @@
         default: true
       },
       maskClosable: Boolean,
-      onYes: Function,
-      onNo: Function,
+      onYes: {
+        type: Function
+      },
+      onNo: {
+        type: Function
+      },
+      customFooter: {
+        type: Boolean,
+        default: false
+      },
+      confirmButtonText: {
+        type: String,
+        default: 'ok'
+      },
+      cancelButtonText: {
+        type: String,
+        default: 'cancel'
+      },
     },
     setup(props, context) {
-      const onClickMask = () => {
-        if (props.maskClosable) {props.onNo();}
-      };
+      const visibleFooter = computed(() => {
+        return props.confirmButtonText || props.cancelButtonText || props.customFooter;
+      });
       const onClose = () => {
-        props.onNo();
+        context.emit('update:visible', false);
       };
-      return { onClickMask, onClose };
+      const onClickMask = () => {
+        if (props.maskClosable) {props.visible && onClose();}
+      };
+      const onCancel = () => {
+        props.onNo && props.onNo();
+        props.visible && onClose();
+      };
+      const onConfirm = () => {
+        if (props.onYes && props.onYes() !== false) {
+          props.visible && onClose();
+        }
+      };
+      return { onClickMask, onConfirm, onCancel, onClose, visibleFooter };
     }
   };
 </script>
