@@ -3,7 +3,7 @@
 </demo>
 <template>
   <div>
-    <Tabs :current-name="current">
+    <Tabs v-model:selected="current">
       <TabsPanel title="tabs 1" name="1">panel 1</TabsPanel>
       <TabsPanel title="tabs 2" name="2">panel 2</TabsPanel>
     </Tabs>
