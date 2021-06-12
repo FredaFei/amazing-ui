@@ -3,7 +3,7 @@
     <div class="tabs-nav-wrapper">
       <div class="tabs-nav" ref="container">
         <div class="tabs-nav-item" v-for="(t,index) in titles" :key="t.name" :class="{'tabs-active':t.name===selected}"
-             :ref="el => { if (el) navItems[index] = el }"
+             :ref="el => { if (t.name===selected) selectedItem = el }"
              @click="()=>onToggle(t.name)">{{t.title}}
         </div>
         <div class="line" ref="indicator"/>
@@ -16,7 +16,7 @@
 </template>
 <script lang="ts">
   import TabsPanel from './TabsPanel.vue';
-  import { ref, computed, onMounted ,onUpdated} from 'vue';
+  import { ref, computed, onMounted, onUpdated } from 'vue';
 
   export default {
     props: {
@@ -37,21 +37,17 @@
       },
     },
     setup(props, context) {
-      const navItems = ref<HTMLDivElement[]>([]);
+      const selectedItem = ref<HTMLDivElement>(null);
       const indicator = ref<HTMLDivElement>(null);
       const container = ref<HTMLDivElement>(null);
       onMounted(() => {
-        console.log(navItems.value);
-        const result = navItems.value.filter(div => div.classList.contains('tabs-active'))[0];
-        const { width, left: left1 } = result.getBoundingClientRect();
+        const { width, left: left1 } = selectedItem.value.getBoundingClientRect();
         indicator.value.style.width = width + 'px';
         const { left: left2 } = container.value.getBoundingClientRect();
         indicator.value.style.left = left1 - left2 + 'px';
       });
       onUpdated(() => {
-        console.log(navItems.value);
-        const result = navItems.value.filter(div => div.classList.contains('tabs-active'))[0];
-        const { width, left: left1 } = result.getBoundingClientRect();
+        const { width, left: left1 } = selectedItem.value.getBoundingClientRect();
         indicator.value.style.width = width + 'px';
         const { left: left2 } = container.value.getBoundingClientRect();
         indicator.value.style.left = left1 - left2 + 'px';
@@ -72,7 +68,7 @@
       const onToggle = (value) => {
         context.emit('update:selected', value);
       };
-      return { titles, defaults, onToggle, current, navItems, indicator, tabsClass, container };
+      return { titles, defaults, onToggle, current, indicator, tabsClass, container, selectedItem };
     }
   };
 </script>
