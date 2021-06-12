@@ -1,9 +1,12 @@
 <template>
-  <div class="tabs-wrapper">
+  <div class="tabs-wrapper" :class="tabsClass">
     <div class="tabs-nav-wrapper">
-      <div class="tabs-nav">
-        <div class="tabs-nav-item" v-for="t in titles" :key="t.name" :class="{'tabs-active':t.name===selected}" @click="()=>onToggle(t.name)">{{t.title}}</div>
-        <div class="line"/>
+      <div class="tabs-nav" ref="container">
+        <div class="tabs-nav-item" v-for="(t,index) in titles" :key="t.name" :class="{'tabs-active':t.name===selected}"
+             :ref="el => { if (el) navItems[index] = el }"
+             @click="()=>onToggle(t.name)">{{t.title}}
+        </div>
+        <div class="line" ref="indicator"/>
       </div>
     </div>
     <ul class="tabs-pane-body">
@@ -13,14 +16,46 @@
 </template>
 <script lang="ts">
   import TabsPanel from './TabsPanel.vue';
-  import { ref, computed } from 'vue';
+  import { ref, computed, onMounted ,onUpdated} from 'vue';
 
   export default {
     props: {
-      name: String,
-      selected: String
+      name: {
+        type: String,
+        required: true
+      },
+      selected: {
+        type: String,
+        required: true
+      },
+      direction: {
+        type: String,
+        default: 'horizontal',
+        validator(val) {
+          return ['horizontal', 'vertical'].indexOf(val) > -1;
+        }
+      },
     },
     setup(props, context) {
+      const navItems = ref<HTMLDivElement[]>([]);
+      const indicator = ref<HTMLDivElement>(null);
+      const container = ref<HTMLDivElement>(null);
+      onMounted(() => {
+        console.log(navItems.value);
+        const result = navItems.value.filter(div => div.classList.contains('tabs-active'))[0];
+        const { width, left: left1 } = result.getBoundingClientRect();
+        indicator.value.style.width = width + 'px';
+        const { left: left2 } = container.value.getBoundingClientRect();
+        indicator.value.style.left = left1 - left2 + 'px';
+      });
+      onUpdated(() => {
+        console.log(navItems.value);
+        const result = navItems.value.filter(div => div.classList.contains('tabs-active'))[0];
+        const { width, left: left1 } = result.getBoundingClientRect();
+        indicator.value.style.width = width + 'px';
+        const { left: left2 } = container.value.getBoundingClientRect();
+        indicator.value.style.left = left1 - left2 + 'px';
+      });
       const defaults = context.slots.default();
       console.log(...defaults);
 
@@ -32,11 +67,12 @@
 
       const titles = defaults.map(tag => ({ title: tag.props.title, name: tag.props.name }));
       const current = computed(() => defaults.filter(tag => tag.props.name === props.selected)[0]);
+      const tabsClass = computed(() => ([`tabs-${props.direction}`]));
 
       const onToggle = (value) => {
         context.emit('update:selected', value);
       };
-      return { titles, defaults, onToggle, current };
+      return { titles, defaults, onToggle, current, navItems, indicator, tabsClass, container };
     }
   };
 </script>
@@ -59,10 +95,10 @@
       flex-shrink: 0;
       border-bottom: 1px solid #ddd;
       transition: transform 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-      &.line {
+      .line {
         position: absolute;
         box-sizing: border-box;
-        transition: transform 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+        transition: left 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
       }
     }
     &-horizontal {
