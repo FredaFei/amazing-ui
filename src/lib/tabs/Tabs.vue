@@ -16,7 +16,7 @@
 </template>
 <script lang="ts">
   import TabsPanel from './TabsPanel.vue';
-  import { ref, computed, onMounted, onUpdated } from 'vue';
+  import { ref, computed, onMounted, watchEffect } from 'vue';
 
   export default {
     props: {
@@ -36,22 +36,21 @@
       const selectedItem = ref<HTMLDivElement>(null);
       const indicator = ref<HTMLDivElement>(null);
       const container = ref<HTMLDivElement>(null);
+      const x = () => {
+        const { width, left: left1 } = selectedItem.value.getBoundingClientRect();
+        indicator.value.style.width = width + 'px';
+        const { left: left2 } = container.value.getBoundingClientRect();
+        indicator.value.style.left = left1 - left2 + 'px';
+
+      };
       onMounted(() => {
-        const { width, left: left1 } = selectedItem.value.getBoundingClientRect();
-        indicator.value.style.width = width + 'px';
-        const { left: left2 } = container.value.getBoundingClientRect();
-        indicator.value.style.left = left1 - left2 + 'px';
-      });
-      onUpdated(() => {
-        const { width, left: left1 } = selectedItem.value.getBoundingClientRect();
-        indicator.value.style.width = width + 'px';
-        const { left: left2 } = container.value.getBoundingClientRect();
-        indicator.value.style.left = left1 - left2 + 'px';
+        watchEffect(x);
       });
       const defaults = context.slots.default();
       console.log(...defaults);
 
       defaults.forEach(tag => {
+        console.log('tag', tag);
         if (tag.type !== TabsPanel) {
           throw new Error('tabs 子节点必须为 TabsPanel');
         }
