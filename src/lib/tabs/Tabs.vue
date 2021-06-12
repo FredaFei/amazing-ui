@@ -2,7 +2,7 @@
   <div class="tabs-wrapper">
     <div class="tabs-nav-wrapper">
       <div class="tabs-nav">
-        <div class="tabs-nav-item" v-for="t in titles" :key="t.name" :class="{'tabs-active':t.name===currentName}">{{t.title}}</div>
+        <div class="tabs-nav-item" v-for="t in titles" :key="t.name" :class="{'tabs-active':t.name===selected}" @click="()=>onToggle(t.name)">{{t.title}}</div>
         <div class="line"/>
       </div>
     </div>
@@ -18,7 +18,7 @@
   export default {
     props: {
       name: String,
-      currentName: String
+      selected: String
     },
     setup(props, context) {
       const defaults = context.slots.default();
@@ -31,7 +31,10 @@
         return tag;
       });
       const titles = defaults.map(tag => ({ title: tag.props.title, name: tag.props.name }));
-      return { titles, defaults };
+      const onToggle = (value) => {
+        context.emit('update:selected', value);
+      };
+      return { titles, defaults, onToggle };
     }
   };
 </script>
