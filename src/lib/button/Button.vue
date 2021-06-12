@@ -1,11 +1,109 @@
 <template>
-  <h1>this is a {{name}}</h1>
+  <button class="am-button-wrapper">
+    <div v-if="icon" class="am-button-body" :class="{[`icon-${iconPosition}`]: true}">
+      <Icon :name="icon" class="icon-name"/>
+      <span class="am-button-content"><slot/></span>
+    </div>
+    <span v-else class="am-button-content"><slot/></span>
+  </button>
 </template>
 
 <script lang="ts">
+  import Icon from '../icon/Icon.vue';
+
   export default {
+    components: { Icon },
     props: {
-      name: String
+      icon: String,
+      iconPosition: {
+        type: String,
+        default: 'left',
+        validator(value) {
+          return value === 'left' || value === 'right';
+        }
+      }
     }
   };
 </script>
+<style lang="scss">
+  @import '../../style/_var.scss';
+  .am-button {
+    &-wrapper {
+      vertical-align: middle;
+      font-size: $button-fontSize;
+      line-height: $button-height;
+      padding: 0 1em;
+      border-radius: $border-radius;
+      border: 1px solid $border-color;
+      background: $button-bg;
+      outline: none;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      position: relative;
+      &:disabled {
+        cursor: not-allowed;
+        background-color: #f5f5f5;
+        border-color: #d9d9d9;
+        &:hover {
+          border-color: #d9d9d9;
+        }
+      }
+      &:hover, &:focus {
+        color: $blue;
+        border-color: $border-color-hover;
+      }
+      &:active {
+        background-color: $border-active-bg;
+      }
+      &:focus {
+        outline: none;
+      }
+      &::-moz-focus-inner {
+        border: none;
+      }
+      & + .am-button-wrapper {
+        margin-left: 0.5em;
+      }
+      > .ripple {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 50%;
+        transform: scale(0);
+        pointer-events: none;
+        opacity: 1;
+        &.active {
+          @include ripple;
+        }
+      }
+    }
+    &-body {
+      position: relative;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      vertical-align: middle;
+      &.icon-left {
+        > .icon-name {
+          order: 1;
+          margin-right: 0.2em;
+        }
+        > .am-button-content {
+          order: 2;
+        }
+      }
+      &.icon-right {
+        > .icon-name {
+          order: 2;
+          margin-left: 0.2em;
+        }
+        > .am-button-content {
+          order: 1;
+        }
+      }
+      > .am-button-content {
+        line-height: 1em;
+      }
+    }
+  }
+</style>
