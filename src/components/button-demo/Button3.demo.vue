@@ -3,7 +3,9 @@
 </demo>
 <template>
   <div>
-    <Button icon="right" iconPosition="right" disabled>编辑</Button>
+    <Button icon="left" iconPosition="right" disabled>编辑</Button>
+    <Button disabled theme="primary">编辑</Button>
+    <Button icon="right" theme="danger" iconPosition="right" disabled>编辑</Button>
   </div>
 </template>
 

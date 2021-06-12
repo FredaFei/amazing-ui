@@ -5,8 +5,8 @@
   <div>
     <Button @click="onClick">按钮1</Button>
     <Button icon="settings" @focus="onClick">设置</Button>
-    <Button icon="upload">下载APP</Button>
-    <Button icon="thumbs-up">好看</Button>
+    <Button icon="upload" theme="primary">下载APP</Button>
+    <Button icon="thumbs-up" theme="danger">好看</Button>
   </div>
 </template>
 
