@@ -41,3 +41,23 @@ $prefix: 'am';
 @mixin ripple {
   animation: ripple 0.65s ease-out;
 }
+@mixin component ($name){
+  .#{$prefix}-#{$name}{
+    @content;
+  }
+}
+
+@function component($name,$modifier:null){
+  @if $modifier == null {
+    @return ".#{$prefix}-#{$name}"
+  }@else{
+    @return ".#{$prefix}-#{$name}-#{$modifier}"
+  }
+}
+@function componentWithoutDot($name,$modifier:null){
+  @if $modifier == null {
+    @return "#{$prefix}-#{$name}"
+  }@else{
+    @return "#{$prefix}-#{$name}-#{$modifier}"
+  }
+}
