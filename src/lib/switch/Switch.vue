@@ -1,5 +1,5 @@
 <template>
-  <span class="switch-wrap" :class="[value ? 'active' : '', disabled ? 'disabled' : '']" @click="onToggle">
+  <span class="switch-wrap" :class="[value &&'active', disabled & 'disabled']" @click="onToggle">
     <span class="core" :class="{active: value}">
       <span class="ripple" :class="{active: value}"></span>
     </span>
