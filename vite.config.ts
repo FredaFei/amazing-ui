@@ -3,6 +3,8 @@ import * as fs from 'fs';
 import { baseParse } from '@vue/compiler-core';
 
 module.exports = {
+  base: './',
+  assetsDir: 'assets',
   plugins: [md()],
   vueCustomBlockTransforms: {
     demo: (options) => {
