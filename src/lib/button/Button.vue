@@ -1,10 +1,9 @@
 <template>
   <button class="am-button-wrapper" :class="[`am-button-${theme}`]">
-    <div v-if="icon" class="am-button-body" :class="{[`icon-${iconPosition}`]: true}">
-      <Icon :name="icon" class="icon-name"/>
+    <div class="am-button-body" :class="{[`icon-${iconPosition}`]: true}">
+      <Icon v-if="icon" :name="icon" class="icon-name"/>
       <span class="am-button-content"><slot/></span>
     </div>
-    <span v-else class="am-button-content"><slot/></span>
   </button>
 </template>
 
