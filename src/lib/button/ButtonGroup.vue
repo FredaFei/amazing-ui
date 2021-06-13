@@ -11,9 +11,6 @@
     name: 'AmButtonGroup',
     setup(props, context) {
       const defaults = context.slots.default();
-      console.log('context', context);
-      console.log('context', defaults);
-
       defaults.forEach(tag => {
         if (tag.type.name !== Button.name) {
           throw new Error('ButtonGroup 子节点必须为 Button');
