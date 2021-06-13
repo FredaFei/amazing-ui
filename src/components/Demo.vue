@@ -5,7 +5,7 @@
       <component :is="component"/>
       <div class="code-box">
         <div class="code-title" @click="toggleCode">
-          <!--        <Icon name={visible ? 'code-open' : 'code-close'}/>-->
+          <Icon :name="[visibleCode ? 'code-open' : 'code-close']"/>
           <span>查看代码</span>
         </div>
         <pre v-if="visibleCode" class="language-html" v-html="html"></pre>
@@ -18,10 +18,12 @@
   import { ref, computed } from 'vue';
   import 'prismjs';
   import 'prismjs/themes/prism-okaidia.css';
+  import Icon from '../lib/icon/Icon.vue';
 
   const Prism = (window as any).Prism;
 
   export default {
+    components: { Icon },
     props: { component: Object },
     setup(props) {
       const visibleCode = ref(false);
@@ -83,6 +85,6 @@
       font-size: 16px;
       cursor: pointer;
     }
-    .am-icon {font-size: 30px;margin-right: 6px;}
+    .am-icon {font-size: 22px;margin-right: 6px;}
   }
 </style>
