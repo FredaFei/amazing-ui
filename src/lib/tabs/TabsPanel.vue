@@ -3,6 +3,7 @@
 </template>
 <script lang="ts">
   export default {
+    name: 'AmTabsPanel',
     props:{
       name: {
         type: String,

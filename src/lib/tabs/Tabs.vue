@@ -19,6 +19,7 @@
   import { ref, computed, onMounted, onUpdated, watchEffect } from 'vue';
 
   export default {
+    name: 'AmTabs',
     props: {
       selected: {
         type: String,
@@ -43,8 +44,8 @@
         selectedItem.value = navsItem.value.filter((el, index) => {
           return el.classList.contains('am-tabs-active');
         })[0];
-        let { left: left1, top: top1 } = container.value.getBoundingClientRect();
-        let { width, left: left2, height, top: top2 } = selectedItem.value.getBoundingClientRect();
+        const { left: left1, top: top1 } = container.value.getBoundingClientRect();
+        const { width, left: left2, height, top: top2 } = selectedItem.value.getBoundingClientRect();
         const lineWidth = props.lineWidthOrHeight || width;
         const lineHeight = props.lineWidthOrHeight || height;
         if (props.direction === 'horizontal') {
@@ -62,7 +63,7 @@
       const defaults = context.slots.default();
 
       defaults.forEach(tag => {
-        if (tag.type !== TabsPanel) {
+        if (tag.type.name !== TabsPanel.name) {
           throw new Error('tabs 子节点必须为 TabsPanel');
         }
       });
