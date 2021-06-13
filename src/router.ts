@@ -11,7 +11,14 @@ import { h } from 'vue';
 
 const history = createWebHashHistory();
 
-const md = (filename) => h(Markdown, { path: `../markdown/${filename}.md`, key: filename });
+import getStarted from './markdown/getStarted.md';
+import install from './markdown/install.md';
+
+/**
+ * 本项目中的rollup配置，不支js持动态导入
+ * */
+// const md = (filename) => h(Markdown, { path: `../markdown/${filename}.md`, key: filename });
+const md = (string) => h(Markdown, { content: string, key: string });
 export const router = createRouter({
   history,
   routes: [
@@ -21,8 +28,8 @@ export const router = createRouter({
       component: Doc,
       children: [
         { path: '', redirect: '/doc/get-started' },
-        { path: 'get-started', component: md('getStarted') },
-        { path: 'install', component: md('install') },
+        { path: 'get-started', component: md(getStarted) },
+        { path: 'install', component: md(install) },
         { path: 'icon', component: IconDemo },
         { path: 'button', component: ButtonDemo },
         { path: 'switch', component: SwitchDemo },
