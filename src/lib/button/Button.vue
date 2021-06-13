@@ -12,6 +12,7 @@
   import Icon from '../icon/Icon.vue';
 
   export default {
+    name: 'AmButton',
     components: { Icon },
     props: {
       icon: String,

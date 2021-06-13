@@ -1,6 +1,6 @@
 <template>
   <div class="am-button-group">
-    <slot />
+    <slot/>
   </div>
 </template>
 
@@ -8,11 +8,14 @@
   import Button from './Button.vue';
 
   export default {
+    name: 'AmButtonGroup',
     setup(props, context) {
       const defaults = context.slots.default();
+      console.log('context', context);
+      console.log('context', defaults);
 
       defaults.forEach(tag => {
-        if (tag.type !== Button) {
+        if (tag.type.name !== Button.name) {
           throw new Error('ButtonGroup 子节点必须为 Button');
         }
       });
