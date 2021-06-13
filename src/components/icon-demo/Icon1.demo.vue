@@ -31,3 +31,8 @@
     }
   };
 </script>
+<style lang="scss" scoped>
+  .am-icon {
+    & + .am-icon {margin-left: 6px;}
+  }
+</style>
