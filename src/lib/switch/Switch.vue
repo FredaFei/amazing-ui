@@ -9,6 +9,7 @@
   import { ref } from 'vue';
 
   export default {
+    name: 'AmSwitch',
     props: {
       value: Boolean,
       disabled: Boolean

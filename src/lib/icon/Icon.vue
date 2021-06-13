@@ -8,6 +8,7 @@
   import { computed } from 'vue';
 
   export default {
+    name: 'AmIcon',
     props: {
       name: {
         type: String,

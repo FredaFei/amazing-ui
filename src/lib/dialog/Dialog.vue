@@ -33,6 +33,7 @@
   import { computed } from 'vue';
 
   export default {
+    name: 'AmDialog',
     components: { Icon, Button },
     props: {
       visible: {
