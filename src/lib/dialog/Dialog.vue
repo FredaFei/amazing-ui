@@ -4,7 +4,7 @@
       <div v-if="mask" class="am-dialog-mask" @click={onClickMask}></div>
       <div class="am-dialog">
         <div class="am-dialog-close" @click="onClose">
-          <Icon name="close"/>
+          <span class="am-dialog-close-icon"></span>
         </div>
         <div class="am-dialog-header">
           <slot name="title"></slot>
@@ -28,13 +28,12 @@
   </template>
 </template>
 <script lang="ts">
-  import Icon from '../icon/Icon.vue';
   import Button from '../button/Button.vue';
   import { computed } from 'vue';
 
   export default {
     name: 'AmDialog',
-    components: { Icon, Button },
+    components: { Button },
     props: {
       visible: {
         type: Boolean,
@@ -120,7 +119,7 @@
       transform: translate(-50%, 50%);
       width: 20px;
       height: 20px;
-      line-height: 20px;
+      vertical-align: middle;
       text-align: center;
       font-size: 16px;
       color: $light-color;
@@ -130,15 +129,28 @@
       cursor: pointer;
       transition: transform 0.25s;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      &:hover {
-        color: $color;
-        border-color: $light-color;
-        transform: translate(-50%, 50%) scale(1.3);
-      }
-      > svg {
-        transition: transform 250ms;
-        &:hover {
-          transform: rotate(90deg);
+      &-icon {
+        position: relative;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        cursor: pointer;
+        &::before,
+        &::after {
+          content: '';
+          position: absolute;
+          height: 1px;
+          background: black;
+          width: 100%;
+          top: 50%;
+          left: 50%;
+        }
+        &::before {
+          transform: translate(-50%, -50%) rotate(-45deg);
+        }
+        &::after {
+          transform: translate(-50%, -50%) rotate(45deg);
         }
       }
     }
