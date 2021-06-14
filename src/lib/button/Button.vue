@@ -1,18 +1,19 @@
 <template>
-  <button class="am-button-wrapper" :class="[`am-button-${theme}`]">
-    <div class="am-button-body" :class="{[`icon-${iconPosition}`]: true}">
-      <Icon v-if="icon" :name="icon" class="icon-name"/>
+  <button class="am-button-wrapper" :class="themeClasses">
+    <div class="am-button-body" :class="iconClasses">
+<!--      <Icon v-if="icon" :name="icon" class="icon-name"/>-->
       <span class="am-button-content"><slot/></span>
     </div>
   </button>
 </template>
 
-<script lang="ts">
-  import Icon from '../icon/Icon.vue';
+<script lang="ts" setup="props">
+  // import Icon from '../icon/Icon.vue';
+  import { computed } from 'vue';
+  declare const props: { icon?: string, iconPosition?: 'left' | 'right', theme?: 'default' | 'primary' | 'danger' };
 
   export default {
     name: 'AmButton',
-    components: { Icon },
     props: {
       icon: String,
       iconPosition: {
@@ -31,43 +32,21 @@
       }
     }
   };
+  const { theme, iconPosition } = props;
+  export const themeClasses = computed(() => {
+    return {
+      [`am-button-${theme}`]: theme,
+    };
+  });
+  export const iconClasses = computed(() => {
+    return {
+      [`icon-${iconPosition}`]: iconPosition,
+    };
+  });
 </script>
 <style lang="scss">
   @import '../../style/_var.scss';
   .am-button {
-    &-default {
-      border: 1px solid $border-color;
-      background: $button-bg;
-      &:hover, &:focus {
-        border-color: $border-color-hover;
-      }
-      &:disabled {
-        color: $light-color;
-        background-color: #f5f5f5;
-        border-color: #d9d9d9;
-        &:hover {
-          border-color: #d9d9d9;
-        }
-      }
-    }
-    &-primary {
-      color: $white;
-      background: $darkblue;
-      border: 1px solid $darkblue;
-      &:hover, &:focus, &:disabled {
-        background: $blue;
-        border-color: $blue;
-      }
-    }
-    &-danger {
-      color: $white;
-      background: $error-color;
-      border: 1px solid $error-color;
-      &:hover, &:focus, &:disabled {
-        background: $error-color-hover;
-        border-color: $error-color-hover;
-      }
-    }
     &-wrapper {
       vertical-align: middle;
       font-size: $button-fontSize;
@@ -104,6 +83,39 @@
         &.active {
           @include ripple;
         }
+      }
+    }
+    &-default, &-wrapper {
+      border: 1px solid $border-color;
+      background: $button-bg;
+      &:hover, &:focus {
+        border-color: $border-color-hover;
+      }
+      &:disabled {
+        color: $light-color;
+        background-color: #f5f5f5;
+        border-color: #d9d9d9;
+        &:hover {
+          border-color: #d9d9d9;
+        }
+      }
+    }
+    &-primary {
+      color: $white;
+      background: $darkblue;
+      border: 1px solid $darkblue;
+      &:hover, &:focus, &:disabled {
+        background: $blue;
+        border-color: $blue;
+      }
+    }
+    &-danger {
+      color: $white;
+      background: $error-color;
+      border: 1px solid $error-color;
+      &:hover, &:focus, &:disabled {
+        background: $error-color-hover;
+        border-color: $error-color-hover;
       }
     }
     &-body {
