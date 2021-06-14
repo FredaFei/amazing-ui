@@ -3,17 +3,15 @@
 </demo>
 <template>
   <div style="font-size:28px">
-    <Icon name="left" rotate="90"/>
-    <Icon name="left" spin/>
+<!--    <Icon name="left" rotate="90"/>-->
+<!--    <Icon name="left" spin/>-->
   </div>
 </template>
 
 <script lang="ts">
-  import Icon from '../../lib/icon/Icon.vue';
+  // import Icon from '../icon/Icon.vue';
 
   export default {
-    components: {
-      Icon
-    }
+    // components: { Icon }
   };
 </script>
