@@ -4,20 +4,21 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup="props, context">
   import Button from './Button.vue';
+  import { SetupContext, Component, defineComponent } from 'vue';
 
+  defineComponent;
   export default {
-    name: 'AmButtonGroup',
-    setup(props, context) {
-      const defaults = context.slots.default();
-      defaults.forEach(tag => {
-        if (tag.type.name !== Button.name) {
-          throw new Error('ButtonGroup 子节点必须为 Button');
-        }
-      });
-    }
+    name: 'AmButtonGroup'
   };
+  declare const context: SetupContext;
+  export const defaults = context.slots.default();
+  defaults.forEach((tag) => {
+    if ((tag.type as Component).name !== Button.name) {
+      throw new Error('ButtonGroup 子节点必须为 Button');
+    }
+  });
 </script>
 <style lang="scss">
   @import '../../style/_var.scss';
