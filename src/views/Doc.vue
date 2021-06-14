@@ -16,9 +16,9 @@
           </ol>
           <h2>组件</h2>
           <ol>
-            <li>
-              <router-link to="/doc/icon">Icon 图标</router-link>
-            </li>
+<!--            <li>-->
+<!--              <router-link to="/doc/icon">Icon 图标</router-link>-->
+<!--            </li>-->
             <li>
               <router-link to="/doc/button">Button 按钮</router-link>
             </li>
