@@ -1,28 +1,17 @@
 <template>
   <button class="am-button-wrapper" :class="themeClasses">
-    <div class="am-button-body" :class="iconClasses">
-<!--      <Icon v-if="icon" :name="icon" class="icon-name"/>-->
-      <span class="am-button-content"><slot/></span>
-    </div>
+    <slot/>
   </button>
 </template>
 
 <script lang="ts" setup="props">
-  // import Icon from '../icon/Icon.vue';
   import { computed } from 'vue';
-  declare const props: { icon?: string, iconPosition?: 'left' | 'right', theme?: 'default' | 'primary' | 'danger' };
+
+  declare const props: { theme?: 'default' | 'primary' | 'danger' };
 
   export default {
     name: 'AmButton',
     props: {
-      icon: String,
-      iconPosition: {
-        type: String,
-        default: 'left',
-        validator(value) {
-          return value === 'left' || value === 'right';
-        }
-      },
       theme: {
         type: String,
         default: 'default',
@@ -32,15 +21,10 @@
       }
     }
   };
-  const { theme, iconPosition } = props;
+  const { theme = 'default' } = props;
   export const themeClasses = computed(() => {
     return {
       [`am-button-${theme}`]: theme,
-    };
-  });
-  export const iconClasses = computed(() => {
-    return {
-      [`icon-${iconPosition}`]: iconPosition,
     };
   });
 </script>
