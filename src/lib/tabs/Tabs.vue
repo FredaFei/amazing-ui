@@ -14,10 +14,16 @@
     </ul>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup="props, context">
   import TabsPanel from './TabsPanel.vue';
-  import { ref, computed, onMounted, onUpdated, watchEffect } from 'vue';
+  import { ref, computed, onMounted, onUpdated, SetupContext, Component, defineComponent } from 'vue';
 
+  declare const props: {
+    selected: string
+    direction: 'horizontal' | 'vertical'
+    lineWidthOrHeight?: number
+  };
+  defineComponent;
   export default {
     name: 'AmTabs',
     props: {
@@ -34,53 +40,115 @@
       },
       lineWidthOrHeight: Number
     },
-    setup(props, context) {
-      const selectedItem = ref<HTMLDivElement>(null);
-      const navsItem = ref<HTMLDivElement[]>([]);
-      const indicator = ref<HTMLDivElement>(null);
-      const container = ref<HTMLDivElement>(null);
+  };
 
-      const calculateLineStyle = () => {
-        selectedItem.value = navsItem.value.filter((el, index) => {
-          return el.classList.contains('am-tabs-active');
-        })[0];
-        const { left: left1, top: top1 } = container.value.getBoundingClientRect();
-        const { width, left: left2, height, top: top2 } = selectedItem.value.getBoundingClientRect();
-        const lineWidth = props.lineWidthOrHeight || width;
-        const lineHeight = props.lineWidthOrHeight || height;
-        if (props.direction === 'horizontal') {
-          indicator.value.style.width = width + 'px';
-          const x = left2 - left1 + (width - lineWidth) / 2;
-          indicator.value.style.transform = `translate3d(${x}px, 0, 0)`;
-        } else {
-          indicator.value.style.height = height + 'px';
-          const y = top2 - top1 + (height - lineHeight) / 2;
-          indicator.value.style.transform = `translate3d(0, ${y}px, 0)`;
-        }
-      };
-      onMounted(calculateLineStyle);
-      onUpdated(calculateLineStyle);
-      const defaults = context.slots.default();
+  declare const context: SetupContext;
+  export const defaults = context.slots.default();
 
-      defaults.forEach(tag => {
-        if (tag.type.name !== TabsPanel.name) {
-          throw new Error('tabs 子节点必须为 TabsPanel');
-        }
-      });
+  defaults.forEach((tag) => {
+    if ((tag.type as Component).name !== TabsPanel.name) {
+      throw new Error('Tabs 子标签必须是 TabsPanel');
+    }
+  });
 
-      const titles = defaults.map(tag => ({ title: tag.props.title, name: tag.props.name }));
-      const current = computed(() => defaults.filter(tag => tag.props.name === props.selected)[0]);
-      const tabsClass = computed(() => ([`am-tabs-${props.direction}`]));
-
-      const onToggle = (value) => {
-        context.emit('update:selected', value);
-      };
-      return {
-        titles, defaults, onToggle, current, indicator, tabsClass,
-        container, selectedItem, navsItem,
-      };
+  const { direction = 'horizontal', } = props;
+  const calculateLineStyle = () => {
+    selectedItem.value = navsItem.value.filter((el, index) => {
+      return el.classList.contains('am-tabs-active');
+    })[0];
+    const { left: left1, top: top1 } = container.value.getBoundingClientRect();
+    const { width, left: left2, height, top: top2 } = selectedItem.value.getBoundingClientRect();
+    const lineWidth = props.lineWidthOrHeight || width;
+    const lineHeight = props.lineWidthOrHeight || height;
+    if (direction === 'horizontal') {
+      indicator.value.style.width = width + 'px';
+      const x = left2 - left1 + (width - lineWidth) / 2;
+      indicator.value.style.transform = `translate3d(${x}px, 0, 0)`;
+    } else {
+      indicator.value.style.height = height + 'px';
+      const y = top2 - top1 + (height - lineHeight) / 2;
+      indicator.value.style.transform = `translate3d(0, ${y}px, 0)`;
     }
   };
+  onMounted(calculateLineStyle);
+  onUpdated(calculateLineStyle);
+  export const selectedItem = ref<HTMLDivElement>(null);
+  export const navsItem = ref<HTMLDivElement[]>([]);
+  export const indicator = ref<HTMLDivElement>(null);
+  export const container = ref<HTMLDivElement>(null);
+
+  export const titles = defaults.map(tag => ({ title: tag.props.title, name: tag.props.name }));
+  export const current = computed(() => defaults.filter(tag => tag.props.name === props.selected)[0]);
+  export const tabsClass = computed(() => ([`am-tabs-${direction}`]));
+
+  export const onToggle = (value) => {
+    context.emit('update:selected', value);
+  };
+
+  // export default {
+  //   name: 'AmTabs',
+  //   props: {
+  //     selected: {
+  //       type: String,
+  //       required: true
+  //     },
+  //     direction: {
+  //       type: String,
+  //       default: 'horizontal',
+  //       validator(val) {
+  //         return ['horizontal', 'vertical'].indexOf(val) > -1;
+  //       }
+  //     },
+  //     lineWidthOrHeight: Number
+  //   },
+  //   setup(props, context) {
+  //     const selectedItem = ref<HTMLDivElement>(null);
+  //     const navsItem = ref<HTMLDivElement[]>([]);
+  //     const indicator = ref<HTMLDivElement>(null);
+  //     const container = ref<HTMLDivElement>(null);
+  //
+  //     const calculateLineStyle = () => {
+  //       selectedItem.value = navsItem.value.filter((el, index) => {
+  //         return el.classList.contains('am-tabs-active');
+  //       })[0];
+  //       const { left: left1, top: top1 } = container.value.getBoundingClientRect();
+  //       const { width, left: left2, height, top: top2 } = selectedItem.value.getBoundingClientRect();
+  //       const lineWidth = props.lineWidthOrHeight || width;
+  //       const lineHeight = props.lineWidthOrHeight || height;
+  //       if (props.direction === 'horizontal') {
+  //         indicator.value.style.width = width + 'px';
+  //         const x = left2 - left1 + (width - lineWidth) / 2;
+  //         indicator.value.style.transform = `translate3d(${x}px, 0, 0)`;
+  //       } else {
+  //         indicator.value.style.height = height + 'px';
+  //         const y = top2 - top1 + (height - lineHeight) / 2;
+  //         indicator.value.style.transform = `translate3d(0, ${y}px, 0)`;
+  //       }
+  //     };
+  //     onMounted(calculateLineStyle);
+  //     onUpdated(calculateLineStyle);
+  //
+  //     const defaults = context.slots.default();
+  //     defaults.forEach(tag => {
+  //       if ((tag.type as Component).name !== TabsPanel.name) {
+  //         throw new Error('tabs 子节点必须为 TabsPanel');
+  //       }
+  //     });
+  //
+  //     const titles = defaults.map(tag => ({ title: tag.props.title, name: tag.props.name }));
+  //     const current = computed(() => defaults.filter(tag => tag.props.name === props.selected)[0]);
+  //     const tabsClass = computed(() => ([`am-tabs-${props.direction}`]));
+  //
+  //     const onToggle = (value) => {
+  //       context.emit('update:selected', value);
+  //     };
+  //     return {
+  //       titles, defaults, onToggle, current, indicator, tabsClass,
+  //       container, selectedItem, navsItem,
+  //     };
+  //   }
+  // };
+  //
 </script>
 <style lang="scss">
   @import '../../style/_var.scss';
