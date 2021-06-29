@@ -1,16 +1,16 @@
 <template>
-  <div class="am-button-group">
+  <div class="am-button-group 22">
     <slot/>
   </div>
 </template>
 
-<script lang="ts" setup="props, context">
+<script lang="ts">
   import Button from './Button.vue';
-  import { SetupContext, Component, defineComponent } from 'vue';
+  import { defineComponent, SetupContext, Component } from 'vue';
 
   defineComponent;
   export default {
-    name: 'AmButtonGroup'
+    name: 'AmButtonGroup',
   };
   declare const context: SetupContext;
   export const defaults = context.slots.default();
