@@ -3,7 +3,11 @@
 </demo>
 <template>
   <div>
-    <Tabs v-model:selected="current" direction="vertical">
+    <ButtonGroup>
+      <Button v-for="it in directions" :key="it" @click="onToggle(it)" :theme="theme(it)">{{it}}</Button>
+    </ButtonGroup>
+
+    <Tabs v-model:selected="current" :direction="currentDirection">
       <TabsPanel title="tabs 1" name="1">panel 1</TabsPanel>
       <TabsPanel title="tabs 1000" name="2">panel 2</TabsPanel>
     </Tabs>
@@ -11,17 +15,24 @@
 </template>
 
 <script lang="ts">
-  import Tabs from '../../lib/tabs/Tabs.vue';
-  import TabsPanel from '../../lib/tabs/TabsPanel.vue';
+  import { Tabs, TabsPanel, Button, ButtonGroup } from 'amazing-ui-vue3';
   import { ref } from 'vue';
 
+  const directions = ['horizontal', 'vertical'];
   export default {
     components: {
-      Tabs, TabsPanel
+      Tabs, TabsPanel, Button, ButtonGroup
     },
     setup() {
+      const currentDirection = ref('horizontal');
+      const onToggle = (value: string) => {
+        currentDirection.value = value;
+      };
+      const theme = (value: string) => {
+        return currentDirection.value === value ? 'primary' : 'default';
+      };
       const current = ref('1');
-      return { current };
+      return { current, currentDirection, onToggle, directions, theme };
     },
   };
 </script>

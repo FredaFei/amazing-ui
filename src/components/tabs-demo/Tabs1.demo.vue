@@ -11,8 +11,7 @@
 </template>
 
 <script lang="ts">
-  import Tabs from '../../lib/tabs/Tabs.vue';
-  import TabsPanel from '../../lib/tabs/TabsPanel.vue';
+  import { Tabs, TabsPanel } from 'amazing-ui-vue3';
   import { ref } from 'vue';
 
   export default {
