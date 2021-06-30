@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup="props, context">
   import Button from './Button.vue';
   import { defineComponent, SetupContext, Component } from 'vue';
 
