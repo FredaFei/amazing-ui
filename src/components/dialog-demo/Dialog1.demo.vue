@@ -37,8 +37,7 @@
 </template>
 
 <script lang="ts">
-  import Button from '../../lib/button/Button.vue';
-  import Dialog from '../../lib/dialog/Dialog.vue';
+  import { Button, Dialog, openDialog as createDialog, alert, confirm, info } from 'amazing-ui-vue3';
   import { ref } from 'vue';
 
   export default {
