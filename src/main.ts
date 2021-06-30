@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import { router } from './router';
 import './index.scss';
+import 'amazing-ui-vue3/dist/lib/index.css';
 import 'github-markdown-css';
 import Markdown from './components/Markdown.vue';
 
