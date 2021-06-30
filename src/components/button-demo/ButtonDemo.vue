@@ -14,7 +14,7 @@
 
   export default {
     components: { Demo },
-    setup() {return { Button1Demo, Button2Demo, Button3Demo };}
+    setup() {return { Button1Demo, Button2Demo,Button3Demo };}
   };
 </script>
 <style lang="scss" scoped>
