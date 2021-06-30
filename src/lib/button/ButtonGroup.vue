@@ -7,6 +7,7 @@
 <script lang="ts" setup="props, context">
   import Button from './Button.vue';
   import { defineComponent, SetupContext, Component } from 'vue';
+  import { checkChildren } from '../utils/CheckChildren';
 
   defineComponent;
   export default {
@@ -14,11 +15,8 @@
   };
   declare const context: SetupContext;
   export const defaults = context.slots.default();
-  defaults.forEach((tag) => {
-    if ((tag.type as Component).name !== Button.name) {
-      throw new Error('ButtonGroup 子节点必须为 Button');
-    }
-  });
+  checkChildren(defaults, Button);
+
 </script>
 <style lang="scss">
   @import '../../style/_var.scss';
