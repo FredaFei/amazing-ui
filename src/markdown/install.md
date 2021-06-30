@@ -17,4 +17,4 @@ npm install amazing-ui
 ```
 
 
-下一节: [#/doc/button](Button)
+下一节: [Button](#/doc/button)
