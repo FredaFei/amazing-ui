@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-  import Button from '../../lib/button/Button.vue';
+  import { Button } from 'amazing-ui-vue3';
 
   export default {
     components: {
