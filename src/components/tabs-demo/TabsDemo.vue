@@ -12,7 +12,7 @@
 
   export default {
     components: { Demo },
-    setup() {return { Tabs1Demo ,Tabs2Demo};}
+    setup() {return { Tabs1Demo, Tabs2Demo, };}
   };
 </script>
 <style lang="scss" scoped>
