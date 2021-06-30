@@ -20,7 +20,7 @@
 
   declare const props: {
     selected: string
-    direction: 'horizontal' | 'vertical'
+    direction?: 'horizontal' | 'vertical'
     lineWidthOrHeight?: number
   };
   defineComponent;
