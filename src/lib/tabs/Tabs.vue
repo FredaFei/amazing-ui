@@ -16,7 +16,8 @@
 </template>
 <script lang="ts" setup="props, context">
   import TabsPanel from './TabsPanel.vue';
-  import { ref, computed, onMounted, onUpdated, SetupContext, Component, defineComponent } from 'vue';
+  import { ref, computed, onMounted, onUpdated, SetupContext, defineComponent } from 'vue';
+  import { checkChildren } from '../utils/CheckChildren';
 
   declare const props: {
     selected: string
@@ -44,15 +45,10 @@
 
   declare const context: SetupContext;
   export const defaults = context.slots.default();
+  checkChildren(defaults, TabsPanel);
 
-  defaults.forEach((tag) => {
-    if ((tag.type as Component).name !== TabsPanel.name) {
-      throw new Error('Tabs 子标签必须是 TabsPanel');
-    }
-  });
-
-  const { direction = 'horizontal', } = props;
   const calculateLineStyle = () => {
+    const { direction = 'horizontal', } = props;
     selectedItem.value = navsItem.value.filter((el, index) => {
       return el.classList.contains('am-tabs-active');
     })[0];
@@ -60,6 +56,7 @@
     const { width, left: left2, height, top: top2 } = selectedItem.value.getBoundingClientRect();
     const lineWidth = props.lineWidthOrHeight || width;
     const lineHeight = props.lineWidthOrHeight || height;
+
     if (direction === 'horizontal') {
       indicator.value.style.width = width + 'px';
       const x = left2 - left1 + (width - lineWidth) / 2;
@@ -79,7 +76,7 @@
 
   export const titles = defaults.map(tag => ({ title: tag.props.title, name: tag.props.name }));
   export const current = computed(() => defaults.filter(tag => tag.props.name === props.selected)[0]);
-  export const tabsClass = computed(() => ([`am-tabs-${direction}`]));
+  export const tabsClass = computed(() => ([`am-tabs-${props.direction}`]));
 
   export const onToggle = (value) => {
     context.emit('update:selected', value);
