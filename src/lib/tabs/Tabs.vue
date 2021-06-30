@@ -76,7 +76,7 @@
 
   export const titles = defaults.map(tag => ({ title: tag.props.title, name: tag.props.name }));
   export const current = computed(() => defaults.filter(tag => tag.props.name === props.selected)[0]);
-  export const tabsClass = computed(() => ([`am-tabs-${props.direction}`]));
+  export const tabsClass = computed(() => ([`am-tabs-${props.direction || 'horizontal'}`]));
 
   export const onToggle = (value) => {
     context.emit('update:selected', value);
