@@ -58,11 +58,11 @@
     const lineHeight = props.lineWidthOrHeight || height;
 
     if (direction === 'horizontal') {
-      indicator.value.style.width = width + 'px';
+      indicator.value.style.width = lineWidth + 'px';
       const x = left2 - left1 + (width - lineWidth) / 2;
       indicator.value.style.transform = `translate3d(${x}px, 0, 0)`;
     } else {
-      indicator.value.style.height = height + 'px';
+      indicator.value.style.height = lineHeight + 'px';
       const y = top2 - top1 + (height - lineHeight) / 2;
       indicator.value.style.transform = `translate3d(0, ${y}px, 0)`;
     }
