@@ -21,8 +21,8 @@
       }
     }
   };
-  const { theme = 'default' } = props;
   export const themeClasses = computed(() => {
+    const { theme = 'default' } = props;
     return {
       [`am-button-${theme}`]: theme,
     };
