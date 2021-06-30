@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-  import Switch from '../../lib/switch/Switch.vue';
+  import { Switch } from 'amazing-ui-vue3';
   import { ref } from 'vue';
 
   export default {
