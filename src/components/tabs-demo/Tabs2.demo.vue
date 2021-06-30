@@ -6,7 +6,7 @@
     <ButtonGroup>
       <Button v-for="it in directions" :key="it" @click="onToggle(it)" :theme="theme(it)">{{it}}</Button>
     </ButtonGroup>
-
+    <Space/>
     <Tabs v-model:selected="current" :direction="currentDirection">
       <TabsPanel title="tabs 1" name="1">panel 1</TabsPanel>
       <TabsPanel title="tabs 1000" name="2">panel 2</TabsPanel>
