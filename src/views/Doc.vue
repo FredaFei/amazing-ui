@@ -26,6 +26,9 @@
               <router-link to="/doc/switch">Switch 开关</router-link>
             </li>
             <li>
+              <router-link to="/doc/radio">Radio 单选</router-link>
+            </li>
+            <li>
               <router-link to="/doc/tabs">Tabs 标签页</router-link>
             </li>
             <li>
