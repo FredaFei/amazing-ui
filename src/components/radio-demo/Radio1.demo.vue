@@ -3,7 +3,7 @@
 </demo>
 <template>
   <div>
-    <!--            <Radio v-model:checked="checkedValue" name="fruit" value="apple">apple</Radio>-->
+    <Radio v-model:checked="checkedValue" name="fruit" value="apple">apple</Radio>
     <Radio :checked="checkedValue" @update:checked="onChange" name="fruit" value="orange">orange</Radio>
   </div>
 </template>
@@ -19,7 +19,6 @@
     setup() {
       const checkedValue = ref('');
       const onChange = (value) => {
-        console.log('122');
         checkedValue.value = value;
       };
       return { onChange, checkedValue };
