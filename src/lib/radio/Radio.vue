@@ -21,20 +21,20 @@
       name: String
     },
     setup(props, context) {
+      const isChecked = () => {
+        return props.checked === props.value;
+      };
       const classes = computed(() => {
         return [
           'am-radio-wrapper',
           {
             'am-radio-disabled': props.disabled,
-            'am-radio-checked': isChecked
+            'am-radio-checked': isChecked()
           }
         ];
       });
-      const isChecked = computed(() => {
-        return props.checked === props.value;
-      });
       const attrs = computed(() => ({
-        name: props.name, value: props.value, checked: isChecked, disabled: props.disabled
+        name: props.name, value: props.value, checked: isChecked(), disabled: props.disabled
       }));
       const onClick = (e) => {
         if (props.disabled) {return; }
