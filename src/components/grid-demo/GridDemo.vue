@@ -1,23 +1,24 @@
 <template>
   <div class="exp-content">
-    <Demo :component="Layout1Demo"/>
-    <Demo :component="Layout2Demo"/>
-    <Demo :component="Layout3Demo"/>
-    <Demo :component="Layout4Demo"/>
+    <Demo :component="Grid1Demo"/>
+    <Demo :component="Grid2Demo"/>
+    <Demo :component="Grid3Demo"/>
+    <Demo :component="Grid4Demo"/>
   </div>
 </template>
 
 <script lang="ts">
-  import Layout1Demo from './Grid1.demo.vue';
-  import Layout2Demo from './Layout2.demo.vue';
-  import Layout3Demo from './Layout3.demo.vue';
-  import Layout4Demo from './Layout4.demo.vue';
+  import Grid1Demo from './Grid1.demo.vue';
+  import Grid2Demo from './Grid2.demo.vue';
+  import Grid3Demo from './Grid3.demo.vue';
+  import Grid4Demo from './Grid4.demo.vue';
   import Demo from '../Demo.vue';
 
   export default {
     components: { Demo },
-    setup() {return { Layout1Demo, Layout2Demo, Layout3Demo, Layout4Demo, };}
+    setup() {return { Grid1Demo, Grid2Demo, Grid3Demo, Grid4Demo };}
   };
 </script>
 <style lang="scss" scoped>
+  @import "index.scss";
 </style>
