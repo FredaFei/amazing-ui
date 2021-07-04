@@ -3,25 +3,16 @@
     <slot></slot>
   </div>
 </template>
-<script lang="ts" setup="props, context">
-  import { defineComponent, SetupContext, Component, ref, onMounted } from 'vue';
-  import Aside from './Aside.vue';
+<script lang="ts">
+  import { defineComponent } from 'vue';
 
   defineComponent;
   export default {
-    name: 'AmLayout'
-  };
-  declare const context: SetupContext;
-  export const defaults = context.slots.default();
-  export const hasAside = ref(false);
-  // onMounted()
-  defaults.forEach((tag) => {
-    if (tag.children.length > 0) {
-      if ((tag.type as Component).name !== Aside.name) {
-        hasAside.value = true;
-      }
+    name: 'AmLayout',
+    props: {
+      hasAside: Boolean
     }
-  });
+  };
 
 </script>
 <style lang="scss">
