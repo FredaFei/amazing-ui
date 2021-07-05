@@ -3,7 +3,8 @@
 </demo>
 <template>
   <div>
-    <Checkbox v-model:value="checked"/>
+    <Checkbox v-model:checked="checked" name="fruit" value="apple">apple</Checkbox>
+    <Checkbox :checked="checked2" @update:checked="onChange" name="fruit" value="orange">orange</Checkbox>
   </div>
 </template>
 
@@ -17,7 +18,11 @@
     },
     setup() {
       const checked = ref(false);
-      return { checked };
+      const checked2 = ref(false);
+      const onChange = (value) => {
+        checked2.value = value;
+      };
+      return { checked, checked2, onChange };
     },
   };
 </script>

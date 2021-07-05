@@ -1,6 +1,6 @@
 <template>
   <div class="exp-content">
-    <Demo :component="Checkbox11Demo"/>
+    <Demo :component="Checkbox1Demo"/>
     <Demo :component="Checkbox2Demo"/>
   </div>
 </template>
@@ -11,7 +11,8 @@
   import Demo from '../Demo.vue';
 
   export default {
-    components: { Demo, Checkbox1Demo, Checkbox2Demo },
+    components: { Demo },
+    setup() {return { Checkbox1Demo, Checkbox2Demo };}
   };
 </script>
 <style lang="scss" scoped>
