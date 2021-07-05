@@ -29,6 +29,9 @@
               <router-link to="/doc/radio">Radio 单选</router-link>
             </li>
             <li>
+              <router-link to="/doc/checkbox">Checkbox 复选框</router-link>
+            </li>
+            <li>
               <router-link to="/doc/layout">Layout 布局</router-link>
             </li>
             <li>
