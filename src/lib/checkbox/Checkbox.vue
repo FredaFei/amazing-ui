@@ -1,6 +1,6 @@
 <template>
-  <label class="am-checkbox-wrapper" :class="classes" @click="onClick">
-      <span class="am-checkbox-input" :class="{'am-checkbox-indeterminate':indeterminate}">
+  <label class="am-checkbox-wrapper" :class="classes" @click="onToggle">
+      <span class="am-checkbox-input" :class="{'am-checkbox-indeterminate': indeterminate}">
         <input type="checkbox" class="am-checkbox" v-bind="attrs"/>
       </span>
     <span class="am-checkbox-label"><slot></slot></span>
@@ -15,12 +15,12 @@
       default: false
     },
     checked: {
-      type: Boolean,
+      type: [Boolean, String, Number],
+      required: true,
       default: false,
-      required: true
     },
     value: {
-      type: [String, Number]
+      type: [Boolean, String, Number],
     },
     disabled: Boolean,
     name: String
@@ -30,9 +30,22 @@
     name: 'AmCheckbox',
     props: CheckboxProps,
     setup(props, context) {
-      const isChecked = () => {
+      const isCheckedArray = () => {
+        return Array.isArray(props.checked);
+      };
+      const hasValue = () => {
+        return props.hasOwnProperty(props.value);
+      };
+      const isSelected = () => {
+        if (isCheckedArray()) {
+          return props.checked.includes(props.value);
+        }
         return props.checked === props.value;
       };
+      // const isChecked = () => {
+      //   console.log('props.checked === props.value', props.checked === props.value);
+      //   return props.checked === props.value;
+      // };
       const classes = computed(() => {
         const { disabled, checked } = props;
         return [
@@ -41,14 +54,45 @@
         ];
       });
       const attrs = computed(() => ({
-        name: props.name, value: props.value, checked: isChecked(), disabled: props.disabled
+        name: props.name, value: props.value, checked: isSelected(), disabled: props.disabled
       }));
+      const onMultilCheck = () => {
+        const newModel = [...props.checked];
+        if (!isSelected()) {
+          newModel.push(props.value);
+        } else {
+          const index = newModel.indexOf(props.value);
+          index >= 0 && newModel.splice(index, 1);
+        }
+        context.emit('update:checked', newModel);
+      };
+      const onSingleCheck = () => {
+        context.emit('update:checked', isSelected() ? '' : props.value);
+      };
+      const onSimpleCheck = () => {
+        context.emit('update:checked', isSelected() ? '' : props.value);
+      };
+      const onToggle = (e) => {
+        if (props.disabled) {
+          return false;
+        }
+        e.preventDefault();
+        console.log('2221');
+        if (isCheckedArray()) {
+          onMultilCheck();
+        } else if (hasValue()) {
+          onSingleCheck();
+        } else {
+          onSimpleCheck();
+        }
+      };
       const onClick = (e) => {
+        console.log('222');
         if (props.disabled) {return; }
         e.preventDefault();
         context.emit('update:checked', props.value);
       };
-      return { classes, attrs, onClick };
+      return { classes, attrs, onToggle };
     }
   };
 </script>
