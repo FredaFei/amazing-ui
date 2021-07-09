@@ -15,12 +15,11 @@
       default: false
     },
     checked: {
-      type: [Boolean, String, Number],
+      type: [Boolean, String, Number, Array],
       required: true,
-      default: false,
     },
     value: {
-      type: [Boolean, String, Number],
+      type: [String, Number],
     },
     disabled: Boolean,
     name: String
@@ -42,15 +41,12 @@
         }
         return props.checked === props.value;
       };
-      // const isChecked = () => {
-      //   console.log('props.checked === props.value', props.checked === props.value);
-      //   return props.checked === props.value;
-      // };
+      console.log('context.slots', context);
       const classes = computed(() => {
         const { disabled, checked } = props;
         return [
           { 'am-checkbox-disabled': disabled },
-          { 'am-checkbox-checked': checked },
+          { 'am-checkbox-checked': isSelected() },
         ];
       });
       const attrs = computed(() => ({
@@ -70,6 +66,7 @@
         context.emit('update:checked', isSelected() ? '' : props.value);
       };
       const onSimpleCheck = () => {
+        console.log('onSimpleCheck', isSelected());
         context.emit('update:checked', isSelected() ? '' : props.value);
       };
       const onToggle = (e) => {
@@ -77,10 +74,12 @@
           return false;
         }
         e.preventDefault();
-        console.log('2221');
+        console.log('isCheckedArray', isCheckedArray());
         if (isCheckedArray()) {
           onMultilCheck();
+          console.log('2');
         } else if (hasValue()) {
+          console.log('hasvalue');
           onSingleCheck();
         } else {
           onSimpleCheck();
