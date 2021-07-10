@@ -1,5 +1,5 @@
 <template>
-  <div class="am-pager-wrapper" :class="{hide:hideOnSinglePage===true &&total<=1}">
+  <div class="am-pager-wrapper">
     <span class="am-pager-item prev" @click="goPage(current-1)" :class="{disabled:current===1}">上一页</span>
     <template v-for="(page,i) in pages()">
       <template v-if="page===-1">
@@ -10,14 +10,21 @@
       </template>
     </template>
     <span class="am-pager-item next" @click="goPage(current+1)" :class="{disabled:current===total}">下一页</span>
+    <template v-if="visibleQuickJumper">
+      <span class="am-pager-quick-jump">跳至
+        <Input class="am-pager-input-page" type="text" placeholder="页码" @keyup="onKeyUp"/>页
+      </span>
+    </template>
   </div>
 </template>
 <script lang="ts">
   import { ref, onMounted } from 'vue';
   import { range, } from '../utils/range';
+  import Input from '../input/Input.vue';
 
   export default {
     name: 'AmPager',
+    components: { Input },
     props: {
       current: {
         type: Number,
@@ -27,9 +34,8 @@
         type: Number,
         default: 10
       },
-      hideOnSinglePage: {
+      visibleQuickJumper: {
         type: Boolean,
-        default: true
       }
     },
     setup(props, context) {
@@ -63,7 +69,14 @@
           context.emit('update:current', n);
         }
       };
-      return { pages, goPage, jumpPages, index };
+      const onKeyUp = (e) => {
+        if (e.keyCode === 13) {
+          const page = e.target.value;
+          if (!/^\d+$/.test(page)) {return;}
+          index.value = parseInt(page) > props.total ? props.total : parseInt(page);
+        }
+      };
+      return { pages, goPage, jumpPages, index, onKeyUp };
     }
   };
 </script>
@@ -79,6 +92,18 @@
     align-items: center;
     &.hide {
       display: none;
+    }
+    &-quick-jump {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 1em;
+    }
+    &-input-page {
+      width: 5em;
+      line-height: $line-height;
+      margin-left: 0.5em;
+      margin-right: 0.5em;
     }
     &-item {
       display: inline-flex;
