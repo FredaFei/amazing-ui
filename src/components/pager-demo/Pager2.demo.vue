@@ -3,7 +3,7 @@
 </demo>
 <template>
   <div>
-    <Pager/>
+    <Pager visible-quick-jumper/>
   </div>
 </template>
 
