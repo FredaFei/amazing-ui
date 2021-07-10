@@ -46,6 +46,9 @@
             <li>
               <router-link to="/doc/dialog">Dialog 对话框</router-link>
             </li>
+            <li>
+              <router-link to="/doc/pager">Pager 分页</router-link>
+            </li>
           </ol>
         </aside>
       </div>
