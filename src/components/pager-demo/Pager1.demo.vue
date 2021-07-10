@@ -2,8 +2,8 @@
   基础应用
 </demo>
 <template>
-  <div style="width: 140px">
-    <Pager/>
+  <div>
+    <Pager v-model:current="count"/>
   </div>
 </template>
 

@@ -2,7 +2,7 @@
   可跳转
 </demo>
 <template>
-  <div style="width: 140px">
+  <div>
     <Pager/>
   </div>
 </template>
