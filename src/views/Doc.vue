@@ -35,6 +35,9 @@
               <router-link to="/doc/controllCount">ControllCount 数量输入框</router-link>
             </li>
             <li>
+              <router-link to="/doc/input">Input 输入框</router-link>
+            </li>
+            <li>
               <router-link to="/doc/layout">Layout 布局</router-link>
             </li>
             <li>
