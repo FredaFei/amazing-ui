@@ -7,7 +7,9 @@
   </label>
 </template>
 <script lang="ts">
-  import { defineComponent, computed } from 'vue';
+  import { defineComponent, computed, PropType } from 'vue';
+  import { warn } from '../utils/warn';
+  import { call, MaybeArray } from '../utils/call';
 
   const CheckboxProps = {
     indeterminate: {
@@ -22,7 +24,15 @@
       type: [String, Number],
     },
     disabled: Boolean,
-    name: String
+    name: String,
+    onChange: {
+      type: [Function, Array] as PropType<undefined | MaybeArray<(value: boolean) => void>>,
+      validator: () => {
+        warn('checkbox', '`on-change` is deprecated, please use `on-update:checked` instead.');
+        return true;
+      },
+      default: undefined
+    }
   };
   defineComponent;
   export default {
@@ -33,17 +43,19 @@
         return Array.isArray(props.checked);
       };
       const hasValue = () => {
-        return props.hasOwnProperty(props.value);
+        return props.hasOwnProperty('value');
       };
       const isSelected = () => {
         if (isCheckedArray()) {
           return props.checked.includes(props.value);
         }
-        return props.checked === props.value;
+        if (hasValue()) {
+          return props.checked === props.value;
+        }
+        return props.checked;
       };
-      console.log('context.slots', context);
       const classes = computed(() => {
-        const { disabled, checked } = props;
+        const { disabled } = props;
         return [
           { 'am-checkbox-disabled': disabled },
           { 'am-checkbox-checked': isSelected() },
@@ -52,6 +64,9 @@
       const attrs = computed(() => ({
         name: props.name, value: props.value, checked: isSelected(), disabled: props.disabled
       }));
+      const onChange = (nextCheckedValue) => {
+        if (props.onChange) call(props.onChange, nextCheckedValue); // deprecated
+      };
       const onMultilCheck = () => {
         const newModel = [...props.checked];
         if (!isSelected()) {
@@ -61,35 +76,30 @@
           index >= 0 && newModel.splice(index, 1);
         }
         context.emit('update:checked', newModel);
+        onChange(newModel);
       };
       const onSingleCheck = () => {
-        context.emit('update:checked', isSelected() ? '' : props.value);
+        const newValue = isSelected() ? '' : props.value;
+        context.emit('update:checked', newValue);
+        onChange(newValue);
       };
       const onSimpleCheck = () => {
-        console.log('onSimpleCheck', isSelected());
-        context.emit('update:checked', isSelected() ? '' : props.value);
+        const newValue = isSelected() ? false : true;
+        context.emit('update:checked', newValue);
+        onChange(newValue);
       };
       const onToggle = (e) => {
         if (props.disabled) {
           return false;
         }
         e.preventDefault();
-        console.log('isCheckedArray', isCheckedArray());
         if (isCheckedArray()) {
           onMultilCheck();
-          console.log('2');
         } else if (hasValue()) {
-          console.log('hasvalue');
           onSingleCheck();
         } else {
           onSimpleCheck();
         }
-      };
-      const onClick = (e) => {
-        console.log('222');
-        if (props.disabled) {return; }
-        e.preventDefault();
-        context.emit('update:checked', props.value);
       };
       return { classes, attrs, onToggle };
     }
