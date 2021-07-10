@@ -9,6 +9,7 @@ import GridDemo from './components/grid-demo/GridDemo.vue';
 import LayoutDemo from './components/layout-demo/LayoutDemo.vue';
 import TabsDemo from './components/tabs-demo/TabsDemo.vue';
 import DialogDemo from './components/dialog-demo/DialogDemo.vue';
+import PagerDemo from './components/pager-demo/PagerDemo.vue';
 import Home from './views/Home.vue';
 import Doc from './views/Doc.vue';
 import Markdown from './components/Markdown.vue';
@@ -45,6 +46,7 @@ export const router = createRouter({
         { path: 'layout', component: LayoutDemo },
         { path: 'tabs', component: TabsDemo },
         { path: 'dialog', component: DialogDemo },
+        { path: 'pager', component: PagerDemo },
       ]
     },
   ]
