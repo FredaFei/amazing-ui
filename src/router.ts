@@ -4,6 +4,7 @@ import ButtonDemo from './components/button-demo/ButtonDemo.vue';
 import SwitchDemo from './components/switch-demo/SwitchDemo.vue';
 import RadioDemo from './components/radio-demo/RadioDemo.vue';
 import CheckboxDemo from './components/checkbox-demo/CheckboxDemo.vue';
+import InputDemo from './components/input-demo/InputDemo.vue';
 import ControllCountDemo from './components/controll-count-demo/ControllCountDemo.vue';
 import GridDemo from './components/grid-demo/GridDemo.vue';
 import LayoutDemo from './components/layout-demo/LayoutDemo.vue';
@@ -41,6 +42,7 @@ export const router = createRouter({
         { path: 'switch', component: SwitchDemo },
         { path: 'radio', component: RadioDemo },
         { path: 'checkbox', component: CheckboxDemo },
+        { path: 'input', component: InputDemo },
         { path: 'controllCount', component: ControllCountDemo },
         { path: 'grid', component: GridDemo },
         { path: 'layout', component: LayoutDemo },
