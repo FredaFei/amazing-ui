@@ -2,8 +2,8 @@
   基础应用
 </demo>
 <template>
-  <div>
-    <ControllCount></ControllCount>
+  <div style="width: 140px">
+    <ControllCount v-model:count="count"/>
   </div>
 </template>
 
@@ -16,8 +16,8 @@
       ControllCount
     },
     setup() {
-      const checked = ref(false);
-      return { checked };
+      const count = ref(1);
+      return { count };
     },
   };
 </script>
