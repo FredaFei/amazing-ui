@@ -1,9 +1,11 @@
 <demo>
-  基础应用
+  disabled 状态
 </demo>
 <template>
   <div>
-    <Input/>
+    <Input v-model="count" disabled/>
+    <p>readonly</p>
+    <Input v-model="count" readonly/>
   </div>
 </template>
 
