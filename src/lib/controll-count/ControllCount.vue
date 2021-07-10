@@ -1,8 +1,8 @@
 <template>
   <div class="am-controllCount">
-    <button :class="['am-controllCount-btn', 'am-controllCount-next',{disabled: count<=minCount}]" @click="changeCount(-1)">-</button>
-    <input type="text" ref="inputRef" @blur="onBlur" :readOnly="readOnly"/>
-    <button :class="['am-controllCount-btn', 'am-controllCount-next',{disabled: count>=maxCount}]" @click="changeCount(+1)">+</button>
+    <button :class="['am-controllCount-btn', 'am-controllCount-next',{disabled: disabled||count<=minCount}]" @click="changeCount(-1)">-</button>
+    <input type="text" ref="inputRef" @blur="onBlur" :readOnly="readOnly||disabled" :disable="disabled"/>
+    <button :class="['am-controllCount-btn', 'am-controllCount-next',{disabled: disabled||count>=maxCount}]" @click="changeCount(+1)">+</button>
   </div>
 </template>
 <script lang="ts">
@@ -24,6 +24,7 @@
         default: 0
       },
       readOnly: Boolean,
+      disabled: Boolean,
     },
     setup(props, context) {
       const currentCount = ref();
@@ -45,6 +46,7 @@
         return true;
       };
       const changeCount = (val: number) => {
+        if (props.disabled) {return;}
         if (!validateCount(props.count, true)) {return;}
         const newCount = currentCount.value + val;
         currentCount.value = newCount;
