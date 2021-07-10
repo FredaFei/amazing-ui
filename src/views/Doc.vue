@@ -16,9 +16,9 @@
           </ol>
           <h2>组件</h2>
           <ol>
-<!--            <li>-->
-<!--              <router-link to="/doc/icon">Icon 图标</router-link>-->
-<!--            </li>-->
+            <!--            <li>-->
+            <!--              <router-link to="/doc/icon">Icon 图标</router-link>-->
+            <!--            </li>-->
             <li>
               <router-link to="/doc/button">Button 按钮</router-link>
             </li>
@@ -30,6 +30,9 @@
             </li>
             <li>
               <router-link to="/doc/checkbox">Checkbox 复选框</router-link>
+            </li>
+            <li>
+              <router-link to="/doc/controllCount">ControllCount 数量输入框</router-link>
             </li>
             <li>
               <router-link to="/doc/layout">Layout 布局</router-link>
