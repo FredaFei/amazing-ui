@@ -52,7 +52,7 @@
     }
   }
   .exp-section {
-    padding: 10px 20px 0;
+    padding: 10px 10px 0;
     border-radius: 4px;
     background: white;
     border: 1px solid #d6d6d6;
