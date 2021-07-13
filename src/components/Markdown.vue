@@ -1,6 +1,6 @@
 <template>
   <div class="markdown-content" v-html="content">
-<!--    <article class="markdown-body" v-html="content"></article>-->
+    <!--    <article class="markdown-body" v-html="content"></article>-->
   </div>
 </template>
 
@@ -63,6 +63,7 @@
           &:hover {background: rgba(60, 90, 100, 0.04);}
         }
         td {
+          font-size: 14px;
           &:first-child {
             width: 20% !important;
             color: #595959;
@@ -71,12 +72,10 @@
           &:nth-child(3) {
             width: 22% !important;
             color: #c41d7f;
-            font-size: 13px;
             word-break: break-all;
           }
           &:nth-child(4) {
             width: 16% !important;
-            font-size: 13px;
           }
         }
       }
