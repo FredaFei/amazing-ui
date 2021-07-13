@@ -4,7 +4,7 @@
     <div class="exp-section">
       <component :is="component"/>
       <div class="code-box">
-        <div class="code-title" @click="toggleCode">
+        <div class="code-title" @click="toggleCode" :title="[visibleCode?'收起代码':'显示代码']">
           <Icon :name="[visibleCode ? 'code-open' : 'code-close']"/>
           <span>查看代码</span>
         </div>
