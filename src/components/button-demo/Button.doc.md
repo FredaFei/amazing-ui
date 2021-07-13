@@ -2,9 +2,8 @@
 
 | 参数         |        说明        |     类型 | 默认值 | 可选值 |
 | ------------ | :----------------: | -------: | -----: | -----: |
-| icon         | 设置按钮的图标类型 |   String |     —— |     —— |
-| iconPosition | 设置图标的摆放位置 |   String |   left |  right |
-| loading      |  设置按钮载入状态  |  Boolean |  false |   true |
+| theme         | 设置按钮的主题 |   String |     default |     default、primary、danger |
+| disabled | 按钮失效状态 |   Boolean |   false |  true |
 | click        |  点击按钮时的回调  | Function |     —— |     —— |
 
 ### Events
