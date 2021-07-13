@@ -4,6 +4,7 @@
     <Demo :component="Checkbox2Demo"/>
     <Demo :component="Checkbox3Demo"/>
     <Demo :component="Checkbox4Demo"/>
+    <Markdown v-bind:content="Doc"/>
   </div>
 </template>
 
@@ -13,10 +14,11 @@
   import Checkbox3Demo from './Checkbox3.demo.vue';
   import Checkbox4Demo from './Checkbox4.demo.vue';
   import Demo from '../Demo.vue';
+  import Doc from './Checkbox.doc.md';
 
   export default {
     components: { Demo },
-    setup() {return { Checkbox1Demo, Checkbox2Demo, Checkbox3Demo, Checkbox4Demo };}
+    setup() {return { Checkbox1Demo, Checkbox2Demo, Checkbox3Demo, Checkbox4Demo, Doc };}
   };
 </script>
 <style lang="scss" scoped>
