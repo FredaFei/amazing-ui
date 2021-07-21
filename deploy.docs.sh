@@ -23,7 +23,7 @@ git remote add origin git@github.com:FredaFei/amazing-ui-vue3.git &&
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
-git push -f -u origin master &&
+git push -f -u origin master:gh-pages &&
 
 # 切换到根目录
 cd -
