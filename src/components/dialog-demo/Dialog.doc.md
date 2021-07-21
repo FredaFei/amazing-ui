@@ -16,3 +16,14 @@
 | on-update:visible   | 当 visible 改变时触发的回调函数 | (visible: Boolean) => void |
 | onYes    | 点击确认按钮时的回调 | () => void  |—— |
 | onNo    | 点击取消按钮时的回调 |  () => void |—— |
+
+
+### 静态方法 Options
+
+| 参数         |说明        |类型 |默认值 |可选值 |
+| ------------ | :----------------|:------- | :----- | :----- |
+| content         |内容 |string、 (() => VNodeChild) |—— |—— |
+| title         |标题 |string 、(() => VNodeChild) |—— |—— |
+| footer |底部内容 |string 、 (() => VNodeChild) |—— |—— |
+| onYes    | 点击确认按钮时的回调 |  () => void |—— |—— |
+| onNo    | 点击取消按钮时的回调 |  () => void |—— |—— |
