@@ -1,12 +1,8 @@
 <template>
-  <div class="markdown-content" v-html="content">
-    <!--    <article class="markdown-body" v-html="content"></article>-->
-  </div>
+  <div class="markdown-content" v-html="content"></div>
 </template>
 
 <script lang="ts">
-  import { ref } from 'vue';
-
   export default {
     props: {
       content: {
@@ -14,13 +10,6 @@
         required: true
       }
     },
-    setup(props) {
-      // const content = ref<string>();
-      // import(props.path).then(result => {
-      //   content.value = result.default;
-      // });
-      // return { content };
-    }
   };
 </script>
 <style lang="scss">
