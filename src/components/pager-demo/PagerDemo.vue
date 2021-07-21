@@ -2,6 +2,7 @@
   <div class="exp-content">
     <Demo :component="Pager1Demo"/>
     <Demo :component="Pager2Demo"/>
+    <Markdown v-bind:content="Doc"/>
   </div>
 </template>
 
@@ -9,10 +10,11 @@
   import Pager1Demo from './Pager1.demo.vue';
   import Pager2Demo from './Pager2.demo.vue';
   import Demo from '../Demo.vue';
+  import Doc from './Pager.doc.md';
 
   export default {
     components: { Demo },
-    setup() {return { Pager1Demo, Pager2Demo };}
+    setup() {return { Pager1Demo, Pager2Demo, Doc };}
   };
 </script>
 <style lang="scss" scoped>
