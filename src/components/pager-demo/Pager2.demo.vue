@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-  import Pager from '../../lib/pager/Pager.vue';
+  import { Pager } from 'amazing-ui-vue3';
   import { ref } from 'vue';
 
   export default {

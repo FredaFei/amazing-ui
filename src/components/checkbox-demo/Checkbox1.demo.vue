@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-  import Checkbox from '../../lib/checkbox/Checkbox.vue';
+  import { Checkbox } from 'amazing-ui-vue3';
   import { ref } from 'vue';
 
   export default {

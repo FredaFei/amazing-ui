@@ -10,7 +10,7 @@
 
 <script lang="ts">
   import { ref } from 'vue';
-  import Radio from '../../lib/radio/Radio.vue';
+  import { Radio } from 'amazing-ui-vue3';
 
   export default {
     components: {

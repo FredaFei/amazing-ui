@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-  import { Layout, Header, Main, Footer } from '../../lib/layout/index';
+  import { Layout, Header, Main, Footer } from 'amazing-ui-vue3';
 
   export default {
     components: {

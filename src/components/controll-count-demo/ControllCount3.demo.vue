@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-  import ControllCount from '../../lib/controll-count/ControllCount.vue';
+  import { ControllCount } from 'amazing-ui-vue3';
   import { ref } from 'vue';
 
   export default {

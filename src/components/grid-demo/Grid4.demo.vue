@@ -36,9 +36,7 @@
 </template>
 
 <script lang="ts">
-  import Button from '../../lib/button/Button.vue';
-  import Row from '../../lib/grid/Row.vue';
-  import Col from '../../lib/grid/Col.vue';
+  import { Row, Col, Button } from 'amazing-ui-vue3';
   import { ref } from 'vue';
 
   export default {

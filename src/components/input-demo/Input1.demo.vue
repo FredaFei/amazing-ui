@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-  import Input from '../../lib/input/Input.vue';
+  import { Input } from 'amazing-ui-vue3';
 
   export default {
     components: {
