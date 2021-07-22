@@ -19,11 +19,7 @@
     },
     setup() {
       const checkedValue = ref('apple');
-      const onChange = (value) => {
-        // console.log('122');
-        // checkedValue.value = value;
-      };
-      return { onChange, checkedValue };
+      return { checkedValue };
     }
   };
 </script>
