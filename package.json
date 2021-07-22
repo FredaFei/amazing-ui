@@ -1,6 +1,6 @@
 {
   "name": "amazing-ui-vue3",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "files": [
     "dist/lib/*"
   ],
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@vue/compiler-sfc": "3.0.0",
-    "amazing-ui-vue3": "^0.0.6",
+    "amazing-ui-vue3": "^0.0.8",
     "prismjs": "1.23.0",
     "rollup-plugin-esbuild": "2.5.0",
     "rollup-plugin-scss": "2.6.0",
