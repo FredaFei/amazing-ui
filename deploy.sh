@@ -15,16 +15,12 @@ cd dist
 # echo 'www.example.com' > CNAME
 
 git init &&
-git add -A &&
-git commit -m 'deploy docs' &&
+git add . &&
+git commit -m 'update docs' &&
 git branch -M master &&
 git remote add origin git@github.com:FredaFei/amazing-ui-vue3.git &&
-# 如果发布到 https://<USERNAME>.github.io
-# git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
-
-# 如果发布到 https://<USERNAME>.github.io/<REPO>
-git push -f -u origin master:gh-pages &&
+git push -f -u origin master &&
 
 # 切换到根目录
 cd -
-echo https://github.com/FredaFei/amazing-ui-vue3/index.html
+echo https://github.com/FredaFei/amazing-ui-vue3/
