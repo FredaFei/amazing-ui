@@ -9,7 +9,7 @@
       <div class="site-nav-item">
         <img src="../assets/logo.png" alt="logo" class="logo"/>
       </div>
-      <div class="site-nav-item"><a href="https://github.com/FredaFei/AUI" :style="{color: '#1890ff'}">github</a></div>
+      <div class="site-nav-item"><a href="https://github.com/FredaFei/amazing-ui" :style="{color: '#1890ff'}">github</a></div>
     </nav>
   </header>
 </template>
