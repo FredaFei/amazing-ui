@@ -29,11 +29,12 @@ const md = (string) => h(Markdown, { content: string, key: string });
 export const router = createRouter({
   history,
   routes: [
-    { path: '/', component: Home },
+    // { path: '/', component: Home },
     {
       path: '/doc',
       component: Doc,
       children: [
+        { path: '/', redirect: '/doc/get-started' },
         { path: '', redirect: '/doc/get-started' },
         { path: 'get-started', component: md(getStarted) },
         { path: 'install', component: md(install) },
