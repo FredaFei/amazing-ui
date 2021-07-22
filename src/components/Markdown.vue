@@ -16,6 +16,11 @@
   .markdown-content {
     overflow-x: auto;
     margin-bottom: 20px;
+    a {
+      color: rgb(3, 102, 214);
+      text-decoration: none;
+      &:hover{text-decoration: underline;}
+    }
     h1,
     h2,
     h3,
