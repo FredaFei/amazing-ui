@@ -1,19 +1,15 @@
 # 安装
 
-一套轻量的web component，基于typeScript、Vue3.0 开发。
+安装方式如下：
 
-一套轻量的web component，基于typeScript、Vue3.0 开发。
-
-一套轻量的web component，基于typeScript、Vue3.0 开发。
-
-```
-yarn add amazing-ui
+``` javascript
+yarn add amazing-ui-vue3
 ```
 
 或
 
-```
-npm install amazing-ui
+``` javascript
+npm install amazing-ui-vue3
 ```
 
 
