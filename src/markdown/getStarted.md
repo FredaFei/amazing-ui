@@ -35,4 +35,4 @@ export default {
 *,*::before,*::after{box-sizing: border-box;}
 ```
 
-下一节: [#/doc/install](安装)
+下一节: [安装](#/doc/install)
