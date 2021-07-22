@@ -1,34 +1,27 @@
-# 基于 Vue 开发的一个 UI 组件库
-
-[![Build Status](https://travis-ci.org/FredaFei/amazing-ui.svg?branch=master)](https://travis-ci.org/FredaFei/amazing-ui)
+# 基于 Vue3 开发的一个 UI 组件库
 
 [React Hooks 版本](https://fredafei.github.io/AUI/#/guide)
 
-## 介绍
-
-基于 Vue 开发的一个 UI 组件库
-
-## 单元测试
-
-+ mocha: JavaScript test framework
-+ karma: JavaScript Test Runner
-+ chai: 断言库
-+ sinon: Standalone test spies, stubs and mocks for JavaScript.  Works with any unit testing framework
-
-+ istanbul: 覆盖率
-
-## 开始使用
-
--   安装
-    使用本框架前，请在 CSS 中开启 border-box
-
-```
-*,*::before,*::after{box-sizing: border-box;}
-```
-
 ## 文档
 
-[文档地址](https://fredafei.github.io/amazing-ui/)
+[文档地址](https://fredafei.github.io/amazing-ui-vue3/#/doc/get-started)
+
+## 运行步骤
+
+1. 运行 yarn
+2. 运行 yarn dev
+3. 打开 http://127.0.0.1:3000
+
+## 官网打包步骤
+1. 运行 yarn
+2. 运行 yarn build
+3. 得到的 dist 目录就是官网源代码
+4. 编辑并运行 sh deploy.sh 就可以上传到 Github 或码云等支持 Pages 功能的平台
+
+## 库文件打包步骤
+
+1. 运行 yarn lib
+2. 得到的 dist/lib 目录就是编译后的库文件所在目录
 
 ## 提问
 
